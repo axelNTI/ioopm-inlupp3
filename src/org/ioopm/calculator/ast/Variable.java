@@ -36,4 +36,15 @@ public class Variable extends Atom {
 
         return new Constant(arg.getValue());
     }
+
+    public int hashCode() {
+        int result = 0;
+        char[] ch = identifier.toCharArray();
+
+        for (char c : ch) {
+            result = result * 31 + Character.getNumericValue(c);
+        }
+
+        return result;
+    }
 }
