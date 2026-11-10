@@ -22,4 +22,8 @@ public abstract class SymbolicExpression {
     public SymbolicExpression eval(Environment vars) {
         throw new InvalidInputException("Can't Evalutate");
     }
+
+    public boolean isCommand() {
+        return false;
+    }
 }
