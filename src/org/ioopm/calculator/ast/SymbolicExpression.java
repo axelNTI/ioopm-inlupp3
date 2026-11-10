@@ -1,7 +1,7 @@
 package org.ioopm.calculator.ast;
 
 public abstract class SymbolicExpression {
-    private int priority = 0;
+    protected int priority = 0;
 
     public boolean isConstant() {
         return false;
