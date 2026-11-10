@@ -14,4 +14,14 @@ public class Neg extends Unary {
     public String toString() {
         return "-%s".formatted(primary);
     }
+
+    public SymbolicExpression eval() {
+        SymbolicExpression arg = this.primary.eval();
+
+        if (!arg.isConstant()) {
+            return new Neg(arg);
+        }
+
+        return new Constant(-(arg.getValue()));
+    }
 }

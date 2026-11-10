@@ -31,4 +31,14 @@ public class Variable extends Atom {
     public boolean equals(Variable other) {
         return this.identifier.compareTo(other.identifier) == 0;
     }
+
+    public SymbolicExpression eval() {
+        SymbolicExpression arg = this.value.eval();
+
+        if (!arg.isConstant()) {
+            return arg;
+        }
+
+        return new Constant(arg.getValue());
+    }
 }

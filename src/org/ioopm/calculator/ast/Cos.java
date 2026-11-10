@@ -14,4 +14,14 @@ public class Cos extends Unary {
     public String toString() {
         return "cos(%s)".formatted(primary);
     }
+
+    public SymbolicExpression eval() {
+        SymbolicExpression arg = this.primary.eval();
+
+        if (!arg.isConstant()) {
+            return new Cos(arg);
+        }
+
+        return new Constant(Math.cos(arg.getValue()));
+    }
 }

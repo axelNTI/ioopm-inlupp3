@@ -14,4 +14,14 @@ public class Sin extends Unary {
     public String toString() {
         return "sin(%s)".formatted(primary);
     }
+
+    public SymbolicExpression eval() {
+        SymbolicExpression arg = this.primary.eval();
+
+        if (!arg.isConstant()) {
+            return new Sin(arg);
+        }
+
+        return new Constant(Math.sin(arg.getValue()));
+    }
 }
