@@ -10,4 +10,15 @@ public abstract class Command extends SymbolicExpression {
     public String toString() {
         return command;
     }
+
+    public boolean equals(Object other) {
+        if (other instanceof Command) {
+            return this.equals((Command) other);
+        }
+        return false;
+    }
+
+    public boolean equals(Command other) {
+        return this.command.compareTo(other.command) == 0;
+    }
 }
