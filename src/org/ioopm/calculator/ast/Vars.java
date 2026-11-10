@@ -1,5 +1,7 @@
 package org.ioopm.calculator.ast;
 
+import org.ioopm.calculator.Statistics;
+
 public class Vars extends Command {
     private static final Vars theInstance = new Vars();
 
@@ -10,7 +12,7 @@ public class Vars extends Command {
         return theInstance;
     }
 
-    public void execute(Environment vars) {
+    public void execute(Environment vars, Statistics stats) {
         for (Variable key : vars.keySet()) {
             System.out.println("%s = %s".formatted(key, vars.get(key)));
         }

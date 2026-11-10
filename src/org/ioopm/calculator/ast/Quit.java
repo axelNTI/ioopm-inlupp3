@@ -1,5 +1,7 @@
 package org.ioopm.calculator.ast;
 
+import org.ioopm.calculator.Statistics;
+
 public class Quit extends Command {
     private static final Quit theInstance = new Quit();
     private Quit() {}
@@ -7,7 +9,11 @@ public class Quit extends Command {
         return theInstance;
     }
 
-    public void execute(Environment vars) {
+    public void execute(Environment vars, Statistics stats) {
+        System.out.println("Quitting");
+        System.out.println("Total number of expressions: " + stats.getNoExpressions());
+        System.out.println("Total successful evaluations: " + stats.getNoSuccessful());
+        System.out.println("Total fully evaluated: " + stats.getNoFully());
         System.exit(0);
     }
 }

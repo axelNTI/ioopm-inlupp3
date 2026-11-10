@@ -1,5 +1,7 @@
 package org.ioopm.calculator.ast;
 
+import org.ioopm.calculator.Statistics;
+
 public abstract class SymbolicExpression {
     protected int priority = 0;
 
@@ -27,7 +29,7 @@ public abstract class SymbolicExpression {
         return false;
     }
 
-    public void execute(Environment vars) {
+    public void execute(Environment vars, Statistics stats) {
         throw new RuntimeException("Tried to run execute on non-commands");
     } 
 }

@@ -17,7 +17,6 @@ public class Assignment extends Binary {
 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression lhs = this.lhs.eval(vars);
-        SymbolicExpression rhs = this.rhs.eval(vars);
 
         if (rhs instanceof Variable) {
             vars.put((Variable) rhs, lhs);
