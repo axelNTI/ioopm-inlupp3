@@ -18,7 +18,8 @@ public class Calculator {
                 SymbolicExpression expr = parser.parse(input, vars);
 
                 if (expr.isCommand()) {
-                    break;
+                    expr.execute(vars);
+                    continue;
                 }
                 SymbolicExpression evaluated = expr.eval(vars);
                 vars.put(new Variable("ans"), evaluated);

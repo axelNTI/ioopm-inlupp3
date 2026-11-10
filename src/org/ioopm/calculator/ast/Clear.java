@@ -6,4 +6,10 @@ public class Clear extends Command {
     public static Clear instance() {
         return theInstance;
     }
+
+    public void execute(Environment vars) {
+        
+        vars.clear();
+        System.out.println("Cleared variables");
+    }
 }

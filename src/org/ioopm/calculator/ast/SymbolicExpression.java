@@ -26,4 +26,8 @@ public abstract class SymbolicExpression {
     public boolean isCommand() {
         return false;
     }
+
+    public void execute(Environment vars) {
+        throw new RuntimeException("Tried to run execute on non-commands");
+    } 
 }

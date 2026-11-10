@@ -6,4 +6,8 @@ public class Quit extends Command {
     public static Quit instance() {
         return theInstance;
     }
+
+    public void execute(Environment vars) {
+        System.exit(0);
+    }
 }
