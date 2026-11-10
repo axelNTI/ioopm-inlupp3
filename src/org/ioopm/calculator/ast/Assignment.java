@@ -24,6 +24,6 @@ public class Assignment extends Binary {
             return lhs;
         }
 
-        return new Assignment(lhs, rhs);
+        throw new IllegalAssignmentException("Can not assign to named constants");
     }
 }
