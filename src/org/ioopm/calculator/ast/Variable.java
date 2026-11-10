@@ -26,7 +26,11 @@ public class Variable extends Atom {
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg = vars.get(this);
 
-        if (arg == null || !arg.isConstant()) {
+        if (arg == null) {
+            return this;
+        }
+
+        if (!arg.isConstant()) {
             return arg;
         }
 
