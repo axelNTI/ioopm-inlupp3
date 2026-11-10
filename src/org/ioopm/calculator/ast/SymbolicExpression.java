@@ -18,4 +18,8 @@ public abstract class SymbolicExpression {
     public double getValue() {
         throw new RuntimeException("getValue() called on expression that is not a constant");
     }
+
+    public SymbolicExpression eval() {
+        throw new InvalidInputException("Can't Evalutate");
+    }
 }

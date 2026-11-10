@@ -14,4 +14,15 @@ public class Assignment extends Binary {
     public String toString() {
         return lhs + " = " + rhs;
     }
+
+    public SymbolicExpression eval() {
+        SymbolicExpression lhs = this.lhs.eval();
+        SymbolicExpression rhs = this.rhs.eval();
+
+        if (rhs instanceof Variable) {
+            return lhs;
+        }
+
+        return new Assignment(lhs, rhs);
+    }
 }
