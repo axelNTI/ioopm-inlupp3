@@ -1,7 +1,5 @@
 package org.ioopm.calculator.ast;
 
-import java.util.function.BiConsumer;
-
 public class Variable extends Atom {
     private String identifier;
 
