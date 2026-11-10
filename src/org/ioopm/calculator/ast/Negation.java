@@ -1,8 +1,8 @@
 package org.ioopm.calculator.ast;
 
-public class Neg extends Unary {
+public class Negation extends Unary {
 
-    public Neg(SymbolicExpression primary) {
+    public Negation(SymbolicExpression primary) {
         super(primary);
         this.priority = 100;
     }
@@ -19,7 +19,7 @@ public class Neg extends Unary {
         SymbolicExpression arg = this.primary.eval();
 
         if (!arg.isConstant()) {
-            return new Neg(arg);
+            return new Negation(arg);
         }
 
         return new Constant(-(arg.getValue()));
