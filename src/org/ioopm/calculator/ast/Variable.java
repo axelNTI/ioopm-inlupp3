@@ -19,4 +19,16 @@ public class Variable extends Atom {
     public SymbolicExpression getExpression() {
         return this.value;
     }
+
+    public boolean equals(Object other) {
+        if (other instanceof Constant) {
+            return this.equals((Variable) other);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean equals(Variable other) {
+        return this.identifier.compareTo(other.identifier) == 0;
+    }
 }

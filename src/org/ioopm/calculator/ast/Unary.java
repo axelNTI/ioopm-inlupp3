@@ -7,4 +7,17 @@ public abstract class Unary extends SymbolicExpression {
         this.primary = primary;
     }
 
+    public boolean equals(Object other) {
+        if (other instanceof Unary) {
+            return this.equals((Unary) other);
+        }
+
+        return false;
+    }
+
+    public boolean equals(Unary other) {
+        boolean primaryEq = this.primary.equals(other.primary);
+        boolean nameEq = this.getName().compareTo(other.getName()) == 0;
+        return primaryEq && nameEq;
+    }
 }
