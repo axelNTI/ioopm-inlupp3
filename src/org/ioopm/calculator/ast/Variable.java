@@ -1,5 +1,7 @@
 package org.ioopm.calculator.ast;
 
+import java.util.function.BiConsumer;
+
 public class Variable extends Atom {
     private String identifier;
 
@@ -12,7 +14,7 @@ public class Variable extends Atom {
     }
 
     public boolean equals(Object other) {
-        if (other instanceof Constant) {
+        if (other instanceof Variable) {
             return this.equals((Variable) other);
         } else {
             return false;
@@ -38,13 +40,6 @@ public class Variable extends Atom {
     }
 
     public int hashCode() {
-        int result = 0;
-        char[] ch = identifier.toCharArray();
-
-        for (char c : ch) {
-            result = result * 31 + Character.getNumericValue(c);
-        }
-
-        return result;
+        return identifier.hashCode();
     }
 }
