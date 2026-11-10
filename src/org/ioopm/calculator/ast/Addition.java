@@ -1,0 +1,17 @@
+package org.ioopm.calculator.ast;
+
+public class Addition extends Binary {
+
+    public Addition(SymbolicExpression lhs, SymbolicExpression rhs) {
+        super(lhs, rhs);
+        this.priority = 30;
+    }
+
+    public String getName() {
+        return "+";
+    }
+
+    public String toString() {
+        return lhs + " + " + rhs;
+    }
+}
