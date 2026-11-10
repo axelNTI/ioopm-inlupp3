@@ -2,7 +2,6 @@ package org.ioopm.calculator.ast;
 
 public class Variable extends Atom {
     private String identifier;
-    private SymbolicExpression value;
 
     public Variable(String identifier) {
         this.identifier = identifier;
@@ -10,14 +9,6 @@ public class Variable extends Atom {
 
     public String toString() {
         return this.identifier;
-    }
-
-    public void setValue(SymbolicExpression value) {
-        this.value = value;
-    }
-
-    public SymbolicExpression getExpression() {
-        return this.value;
     }
 
     public boolean equals(Object other) {
@@ -32,8 +23,8 @@ public class Variable extends Atom {
         return this.identifier.compareTo(other.identifier) == 0;
     }
 
-    public SymbolicExpression eval() {
-        SymbolicExpression arg = this.value.eval();
+    public SymbolicExpression eval(Environment vars) {
+        SymbolicExpression arg = vars.get(this);
 
         if (!arg.isConstant()) {
             return arg;

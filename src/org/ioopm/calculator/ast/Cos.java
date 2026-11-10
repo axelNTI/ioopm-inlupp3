@@ -15,8 +15,8 @@ public class Cos extends Unary {
         return "cos(%s)".formatted(primary);
     }
 
-    public SymbolicExpression eval() {
-        SymbolicExpression arg = this.primary.eval();
+    public SymbolicExpression eval(Environment vars) {
+        SymbolicExpression arg = this.primary.eval(vars);
 
         if (!arg.isConstant()) {
             return new Cos(arg);

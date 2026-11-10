@@ -15,8 +15,8 @@ public class Sin extends Unary {
         return "sin(%s)".formatted(primary);
     }
 
-    public SymbolicExpression eval() {
-        SymbolicExpression arg = this.primary.eval();
+    public SymbolicExpression eval(Environment vars) {
+        SymbolicExpression arg = this.primary.eval(vars);
 
         if (!arg.isConstant()) {
             return new Sin(arg);
