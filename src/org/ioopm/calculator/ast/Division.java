@@ -15,9 +15,9 @@ public class Division extends Binary {
         return lhs + " / " + rhs;
     }
 
-    public SymbolicExpression eval() {
-        SymbolicExpression lhs = this.lhs.eval();
-        SymbolicExpression rhs = this.rhs.eval();
+    public SymbolicExpression eval(Environment vars) {
+        SymbolicExpression lhs = this.lhs.eval(vars);
+        SymbolicExpression rhs = this.rhs.eval(vars);
 
         if (lhs.isConstant() && rhs.isConstant()) {
             if (rhs.getValue() == 0) throw new InvalidInputException("Can't divide by 0");
