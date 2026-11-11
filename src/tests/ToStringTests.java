@@ -83,4 +83,23 @@ public class ToStringTests {
 
         assert (actual.toString().compareTo(expected) == 0) : "Assignment.toString is incorrect";
     }
+
+    public static void testNestedExpression() {
+        SymbolicExpression actual;
+        String expected;
+
+        actual = new Division(
+                new Addition(new Constant(3), new Constant(2)),
+                new Multiplication(new Constant(2), new Constant(3)));
+
+        expected = "( 3.0 + 2.0 ) / ( 2.0 * 3.0 )";
+
+        assert actual.toString().compareTo(expected) == 0 : "\nExpected: %s\nActual:   %s".formatted(expected, actual);
+
+        actual = new Negation(new Addition(new Constant(2), new Constant(3)));
+
+        expected = "-( 2.0 + 3.0 )";
+
+        assert actual.toString().compareTo(expected) == 0 : "\nExpected: %s\nActual:   %s".formatted(expected, actual);
+    }
 }
