@@ -13,7 +13,7 @@ public class Negation extends Unary {
 
     public String toString() {
         if (primary instanceof Binary) {
-            return "-(%s)".formatted(primary);
+            return "-( %s )".formatted(primary);
         }
 
         return "-%s".formatted(primary);
