@@ -20,7 +20,7 @@ public class Division extends Binary {
             lhsStr = lhs.toString();
         }
 
-        if (rhs.priority < this.priority) {
+        if (rhs instanceof Binary) {
             rhsStr = "( " + rhs + " )";
         } else {
             rhsStr = rhs.toString();
