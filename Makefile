@@ -5,8 +5,8 @@ run:
 	java -cp classes org.ioopm.calculator.Calculator
 
 test:
-	javac -d classes -sourcepath tests tests/org/ioopm/calculator/TestSuite.java
-	java -ea -cp classes org.ioopm.calculator.TestSuite
+	javac -d classes -sourcepath src src/tests/TestSuite.java
+	java -ea -cp classes tests/TestSuite
 
 clean:
 	rm -rf classes
