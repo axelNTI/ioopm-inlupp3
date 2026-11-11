@@ -1,0 +1,86 @@
+package tests;
+
+import org.ioopm.calculator.ast.*;
+
+public class ToStringTests {
+
+    public static void testAtomExpression() {
+        SymbolicExpression actual;
+        String expected;
+
+        actual = new Constant(7734);
+        expected = "7734.0";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Constant.toString is incorrect";
+
+        actual = new Variable("x");
+        expected = "x";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Variable.toString is incorrect";
+
+        actual = new NamedConstant("Answer", 42.0);
+        expected = "Answer";
+
+        assert (actual.toString().compareTo(expected) == 0) : "NamedConstant.toString is incorrect";
+    }
+
+    public static void testUnaryExpression() {
+        SymbolicExpression actual;
+        String expected;
+
+        actual = new Sin(new Constant(4859));
+        expected = "sin(4859.0)";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Sin.toString is incorrect";
+
+        actual = new Cos(new Constant(3234));
+        expected = "cos(3234.0)";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Cos.toString is incorrect";
+
+        actual = new Exp(new Constant(1589));
+        expected = "exp(1589.0)";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Exp.toString is incorrect";
+
+        actual = new Log(new Constant(1648));
+        expected = "log(1648.0)";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Log.toString is incorrect";
+
+        actual = new Negation(new Constant(1916));
+        expected = "-1916.0";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Negation.toString is incorrect";
+    }
+
+    public static void testBinaryExpression() {
+        SymbolicExpression actual;
+        String expected;
+
+        actual = new Addition(new Constant(1), new Constant(2));
+        expected = "1.0 + 2.0";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Addition.toString is incorrect";
+
+        actual = new Subtraction(new Constant(5), new Constant(2));
+        expected = "5.0 - 2.0";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Subtraction.toString is incorrect";
+
+        actual = new Multiplication(new Constant(5), new Constant(6));
+        expected = "5.0 * 6.0";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Multiplication.toString is incorrect";
+
+        actual = new Division(new Constant(15), new Constant(3));
+        expected = "15.0 / 3.0";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Division.toString is incorrect";
+
+        actual = new Assignment(new Constant(10), new Variable("x"));
+        expected = "10.0 = x";
+
+        assert (actual.toString().compareTo(expected) == 0) : "Assignment.toString is incorrect";
+    }
+}
