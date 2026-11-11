@@ -25,6 +25,7 @@ public class Calculator {
                 stats.addNoExpressions();
                 SymbolicExpression evaluated = expr.eval(vars);
                 vars.put(new Variable("ans"), evaluated);
+                System.out.println(evaluated);
 
                 if (evaluated.isConstant()) {
                     stats.addNoFully();
