@@ -12,7 +12,21 @@ public class Addition extends Binary {
     }
 
     public String toString() {
-        return lhs + " + " + rhs;
+        String lhsStr = "";
+        String rhsStr = "";
+        if (lhs.priority < this.priority) {
+            lhsStr = "( " + lhs + " )";
+        } else {
+            lhsStr = lhs.toString();
+        }
+
+        if (rhs.priority < this.priority) {
+            rhsStr = "( " + rhs + " )";
+        } else {
+            rhsStr = rhs.toString();
+        }
+
+        return lhsStr + " + " + rhsStr;
     }
 
     public SymbolicExpression eval(Environment vars) {
