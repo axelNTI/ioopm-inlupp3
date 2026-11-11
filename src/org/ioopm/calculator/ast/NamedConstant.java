@@ -7,6 +7,7 @@ public class NamedConstant extends Atom {
     public NamedConstant(String name, Double value) {
         this.name = name;
         this.value = value;
+        this.priority = 150;
     }
 
     public String toString() {
@@ -25,7 +26,7 @@ public class NamedConstant extends Atom {
         return this.name.compareTo(other.name) == 0;
     }
 
-    public SymbolicExpression eval() {
+    public SymbolicExpression eval(Environment vars) {
         return new Constant(value);
     }
 }

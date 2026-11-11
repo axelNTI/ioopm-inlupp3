@@ -5,6 +5,7 @@ public class Variable extends Atom {
 
     public Variable(String identifier) {
         this.identifier = identifier;
+        this.priority = 150;
     }
 
     public String toString() {
