@@ -18,7 +18,7 @@ public class EvalTests {
 
         SymbolicExpression add2 = new Addition(const1, constNeg);
         double sum2 = add2.eval(vars).getValue();
-        assert (sum2 == -8) : ("Expected: 10, Got: " + sum2);
+        assert (sum2 == -8) : ("Expected: -8, Got: " + sum2);
     }
 
     public static void testSubtraction() {
@@ -128,7 +128,100 @@ public class EvalTests {
     }
 
     public static void testExponent() {
+        Environment vars = new Environment();
+
+        SymbolicExpression const0 = new Constant(0);
+        SymbolicExpression const1 = new Constant(1);
+        SymbolicExpression const7 = new Constant(7);
+        SymbolicExpression ln7 = new Log(const7);
+
+        SymbolicExpression e0 = new Exp(const0);
+        SymbolicExpression e1 = new Exp(const1);
+        SymbolicExpression e7 = new Exp(ln7);
+        double result1 = e0.eval(vars).getValue();
+        double resultE = e1.eval(vars).getValue();
+        double result7 = e7.eval(vars).getValue();
+
+        assert (result1 == 1) : ("Expected: 1, Got: " + result1);
+        assert (resultE == Math.E) : ("Expected: " + Math.E + ", Got: " + resultE);
+        assert (result7 == Math.exp(Math.log(7))) : ("Expected: " + Math.exp(Math.log(7)) + ", Got: " + result7);
+    }
+
+    public static void testLog() {
+        Environment vars = new Environment();
         
+        SymbolicExpression const1 = new Constant(1);
+        SymbolicExpression constE = new Constant(Math.E);
+        SymbolicExpression const0 = new Constant(1/Math.E);
+
+        SymbolicExpression log1 = new Log(const1);
+        SymbolicExpression log0 = new Log(const0);
+        SymbolicExpression logE = new Log(constE);
+        double result0 = log1.eval(vars).getValue();
+        double result1 = logE.eval(vars).getValue();
+        double resultNeg = log0.eval(vars).getValue();
+
+        assert (result0 == 0) : ("Expected: 0, Got: " + result0);
+        assert (result1 == 1) : ("Expected: 1, Got: " + result1);
+        assert (resultNeg == -1) : ("Expected: -1, Got: " + resultNeg);
+    }
+
+    public static void testNegation() {
+        Environment vars = new Environment();
+
+        SymbolicExpression const0 = new Constant(0);
+        SymbolicExpression const6 = new Constant(6);
+        SymbolicExpression const9 = new Constant(-9);
+
+        SymbolicExpression neg0 = new Negation(const0);
+        SymbolicExpression neg6 = new Negation(const6);
+        SymbolicExpression neg9 = new Negation(const9);
+        double negation0 = neg0.eval(vars).getValue();
+        double negation6 = neg6.eval(vars).getValue();
+        double negation9 = neg9.eval(vars).getValue();
+        
+        assert (negation0 == 0) : ("Expected: 0, Got: " + negation0);
+        assert (negation6 == -6) : ("Expected: -6, Got: " + negation6);
+        assert (negation9 == 9) : ("Expected: 9, Got: " + negation9);
+    }
+
+    public static void testVariable() {
+        Environment vars = new Environment();
+
+        Variable varX = new Variable("x");
+        Variable varY = new Variable("y");
+        Variable varZ = new Variable("z");
+        SymbolicExpression const2 = new Constant(2);
+        SymbolicExpression const6 = new Constant(6);
+        SymbolicExpression const89 = new Constant(89);
+
+        vars.put(varX, const2);
+        vars.put(varY, const6);
+        vars.put(varZ, const89);
+
+        double resultX = varX.eval(vars).getValue();
+        double resultY = varY.eval(vars).getValue();
+        double resultZ = varZ.eval(vars).getValue();
+
+        assert (resultX == 2) : ("Expected: 2, Got: " + resultX);
+        assert (resultY == 6) : ("Expected: 6, Got: " + resultY);
+        assert (resultZ == 89) : ("Expected: 89, Got: " + resultZ);
+    }
+
+    public static void testConstant() {
+        Environment vars = new Environment();
+
+        SymbolicExpression const0 = new Constant(0);
+        SymbolicExpression const73 = new Constant(73);
+        SymbolicExpression const53 = new Constant(-53);
+    
+        double result0 = const0.eval(vars).getValue();
+        double result73 = const73.eval(vars).getValue();
+        double result53 = const53.eval(vars).getValue();
+
+        assert (result0 == 0) : ("Expected: 0, Got: " + result0);
+        assert (result73 == 73) : ("Expected: 73, Got: " + result73);
+        assert (result53 == -53) : ("Expected: -53, Got: " + result53);
     }
 
     public static void testLongExpression() {
