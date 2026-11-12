@@ -6,7 +6,7 @@ run:
 
 test:
 	javac -d classes -sourcepath src src/tests/TestSuite.java
-	java -ea -cp classes tests/TestSuite
+	java -enableassertions -cp classes tests/TestSuite
 
 clean:
 	rm -rf classes
