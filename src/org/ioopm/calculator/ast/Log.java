@@ -8,11 +8,11 @@ public class Log extends Unary {
     }
 
     public String getName() {
-        return "log";
+        return "Log";
     }
 
     public String toString() {
-        return "log(%s)".formatted(primary);
+        return "Log( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {

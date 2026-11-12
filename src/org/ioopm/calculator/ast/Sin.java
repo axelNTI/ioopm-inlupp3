@@ -8,11 +8,11 @@ public class Sin extends Unary {
     }
 
     public String getName() {
-        return "sin";
+        return "Sin";
     }
 
     public String toString() {
-        return "sin(%s)".formatted(primary);
+        return "Sin( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {

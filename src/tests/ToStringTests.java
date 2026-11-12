@@ -29,22 +29,22 @@ public class ToStringTests {
         String expected;
 
         actual = new Sin(new Constant(4859));
-        expected = "sin(4859.0)";
+        expected = "Sin( 4859.0 )";
 
         assert actual.toString().compareTo(expected) == 0 : "\nExpected: %s\nActual:   %s".formatted(expected, actual);
 
         actual = new Cos(new Constant(3234));
-        expected = "cos(3234.0)";
+        expected = "Cos( 3234.0 )";
 
         assert actual.toString().compareTo(expected) == 0 : "\nExpected: %s\nActual:   %s".formatted(expected, actual);
 
         actual = new Exp(new Constant(1589));
-        expected = "exp(1589.0)";
+        expected = "Exp( 1589.0 )";
 
         assert actual.toString().compareTo(expected) == 0 : "\nExpected: %s\nActual:   %s".formatted(expected, actual);
 
         actual = new Log(new Constant(1648));
-        expected = "log(1648.0)";
+        expected = "Log( 1648.0 )";
 
         assert actual.toString().compareTo(expected) == 0 : "\nExpected: %s\nActual:   %s".formatted(expected, actual);
 

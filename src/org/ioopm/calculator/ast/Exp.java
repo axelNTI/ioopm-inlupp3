@@ -8,11 +8,11 @@ public class Exp extends Unary {
     }
 
     public String getName() {
-        return "exp";
+        return "Exp";
     }
 
     public String toString() {
-        return "exp(%s)".formatted(primary);
+        return "Exp( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {

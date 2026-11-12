@@ -8,11 +8,11 @@ public class Cos extends Unary {
     }
 
     public String getName() {
-        return "cos";
+        return "Cos";
     }
 
     public String toString() {
-        return "cos(%s)".formatted(primary);
+        return "Cos( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {
