@@ -4,6 +4,7 @@ public class TestSuite {
 
     public static void main(String[] args) {
         System.out.println("Starting tests");
+
         EvalTests.testAddition();
         EvalTests.testSubtraction();
         EvalTests.testMultiplication();
@@ -17,6 +18,22 @@ public class TestSuite {
         EvalTests.testVariable();
         EvalTests.testConstant();
         EvalTests.testLongExpression();
+
+        EqualsTests.testAtomExpression();
+        EqualsTests.testBinaryExpression();
+        EqualsTests.testEqualValueButNotEqualTree();
+        EqualsTests.testUnaryExpression();
+
+        ParserTests.testAtomExpression();
+        ParserTests.testBinaryExpression();
+        ParserTests.testCommandExpression();
+        ParserTests.testUnaryExpression();
+
+        ToStringTests.testAtomExpression();
+        ToStringTests.testBinaryExpression();
+        ToStringTests.testNestedExpression();
+        ToStringTests.testUnaryExpression();
+
         System.out.println("Tests done");
     }
 }
