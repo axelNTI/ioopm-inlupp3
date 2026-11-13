@@ -11,24 +11,6 @@ public class Subtraction extends Binary {
         return "-";
     }
 
-    public String toString() {
-        String lhsStr = "";
-        String rhsStr = "";
-        if (lhs.priority < this.priority) {
-            lhsStr = "( " + lhs + " )";
-        } else {
-            lhsStr = lhs.toString();
-        }
-
-        if (rhs.priority < this.priority) {
-            rhsStr = "( " + rhs + " )";
-        } else {
-            rhsStr = rhs.toString();
-        }
-
-        return lhsStr + " - " + rhsStr;
-    }
-
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression lhs = this.lhs.eval(vars);
         SymbolicExpression rhs = this.rhs.eval(vars);

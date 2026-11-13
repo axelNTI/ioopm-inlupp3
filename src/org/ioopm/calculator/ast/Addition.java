@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public class Addition extends Binary {
+public class Addition extends Binary implements  ExpressionInterface {
 
     public Addition(SymbolicExpression lhs, SymbolicExpression rhs) {
         super(lhs, rhs);
@@ -9,24 +9,6 @@ public class Addition extends Binary {
 
     public String getName() {
         return "+";
-    }
-
-    public String toString() {
-        String lhsStr = "";
-        String rhsStr = "";
-        if (lhs.priority < this.priority) {
-            lhsStr = "( " + lhs + " )";
-        } else {
-            lhsStr = lhs.toString();
-        }
-
-        if (rhs.priority < this.priority) {
-            rhsStr = "( " + rhs + " )";
-        } else {
-            rhsStr = rhs.toString();
-        }
-
-        return lhsStr + " + " + rhsStr;
     }
 
     public SymbolicExpression eval(Environment vars) {

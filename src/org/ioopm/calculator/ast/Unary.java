@@ -8,13 +8,13 @@ public abstract class Unary extends SymbolicExpression {
     }
 
     public String toString() {
-        String[] args = { primary.toString() };
 
         if (FunctionInterface.class.isAssignableFrom(getClass())) {
+            String[] args = { primary.toString() };
             return FunctionInterface.getFormat(getName(), args);
         }
-
-        return "";
+        SymbolicExpression[] args = { primary };
+        return ExpressionInterface.getFormat(getName(), args);
     }
 
     public boolean equals(Object other) {
