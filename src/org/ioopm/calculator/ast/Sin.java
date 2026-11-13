@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public class Sin extends Unary {
+public class Sin extends Unary implements FunctionInterface {
 
     public Sin(SymbolicExpression primary) {
         super(primary);
@@ -9,10 +9,6 @@ public class Sin extends Unary {
 
     public String getName() {
         return "Sin";
-    }
-
-    public String toString() {
-        return "Sin( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {

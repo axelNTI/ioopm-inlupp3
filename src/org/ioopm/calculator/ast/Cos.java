@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public class Cos extends Unary {
+public class Cos extends Unary implements FunctionInterface {
 
     public Cos(SymbolicExpression primary) {
         super(primary);
@@ -9,10 +9,6 @@ public class Cos extends Unary {
 
     public String getName() {
         return "Cos";
-    }
-
-    public String toString() {
-        return "Cos( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {

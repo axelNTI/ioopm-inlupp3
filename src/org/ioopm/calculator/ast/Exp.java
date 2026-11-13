@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public class Exp extends Unary {
+public class Exp extends Unary implements FunctionInterface {
 
     public Exp(SymbolicExpression primary) {
         super(primary);
@@ -9,10 +9,6 @@ public class Exp extends Unary {
 
     public String getName() {
         return "Exp";
-    }
-
-    public String toString() {
-        return "Exp( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {

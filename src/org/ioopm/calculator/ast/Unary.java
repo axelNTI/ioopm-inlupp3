@@ -7,6 +7,16 @@ public abstract class Unary extends SymbolicExpression {
         this.primary = primary;
     }
 
+    public String toString() {
+        String[] args = { primary.toString() };
+
+        if (FunctionInterface.class.isAssignableFrom(getClass())) {
+            return FunctionInterface.getFormat(getName(), args);
+        }
+
+        return "";
+    }
+
     public boolean equals(Object other) {
         if (other instanceof Unary) {
             return this.equals((Unary) other);

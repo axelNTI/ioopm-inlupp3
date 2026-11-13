@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public class Log extends Unary {
+public class Log extends Unary implements FunctionInterface {
 
     public Log(SymbolicExpression primary) {
         super(primary);
@@ -9,10 +9,6 @@ public class Log extends Unary {
 
     public String getName() {
         return "Log";
-    }
-
-    public String toString() {
-        return "Log( %s )".formatted(primary);
     }
 
     public SymbolicExpression eval(Environment vars) {
