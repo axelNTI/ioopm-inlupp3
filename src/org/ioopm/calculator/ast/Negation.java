@@ -7,10 +7,12 @@ public class Negation extends Unary implements ExpressionInterface {
         this.priority = 100;
     }
 
+    @Override 
     public String getName() {
         return "-";
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg = this.primary.eval(vars);
 

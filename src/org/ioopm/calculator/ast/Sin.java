@@ -7,10 +7,12 @@ public class Sin extends Unary implements FunctionInterface {
         this.priority = 90;
     }
 
+    @Override 
     public String getName() {
         return "Sin";
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg = this.primary.eval(vars);
 

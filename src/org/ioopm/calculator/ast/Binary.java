@@ -9,6 +9,7 @@ public abstract class Binary extends SymbolicExpression {
         this.rhs = rhs;
     }
 
+    @Override 
     public boolean equals(Object other) {
         if (other instanceof Binary) {
             return this.equals((Binary) other);
@@ -17,6 +18,7 @@ public abstract class Binary extends SymbolicExpression {
         }
     }
 
+    @Override 
     public String toString() {
         SymbolicExpression[] args = {lhs, rhs};
         return ExpressionInterface.getFormat(getName(), args);

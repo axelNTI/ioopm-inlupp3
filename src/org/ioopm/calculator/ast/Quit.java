@@ -9,6 +9,7 @@ public class Quit extends Command {
         return theInstance;
     }
 
+    @Override 
     public void execute(Environment vars, Statistics stats) {
         System.out.println("Quitting");
         System.out.println("Total number of expressions: " + stats.getNoExpressions());

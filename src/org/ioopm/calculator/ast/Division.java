@@ -7,10 +7,12 @@ public class Division extends Binary implements ExpressionInterface {
         this.priority = 60;
     }
 
+    @Override 
     public String getName() {
         return "/";
     }   
 
+    @Override 
     public String toString() {
         String lhsStr = "";
         String rhsStr = "";
@@ -29,6 +31,7 @@ public class Division extends Binary implements ExpressionInterface {
         return lhsStr + " / " + rhsStr;
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression lhs = this.lhs.eval(vars);
         SymbolicExpression rhs = this.rhs.eval(vars);

@@ -9,6 +9,7 @@ public class Clear extends Command {
         return theInstance;
     }
 
+    @Override 
     public void execute(Environment vars, Statistics stats) {
         
         vars.clear();

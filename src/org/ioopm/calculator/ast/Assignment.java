@@ -1,16 +1,18 @@
 package org.ioopm.calculator.ast;
 
 public class Assignment extends Binary {
-    
+
     public Assignment(SymbolicExpression lhs, SymbolicExpression rhs) {
         super(lhs, rhs);
         this.priority = 10;
     }
-    
+
+    @Override
     public String getName() {
         return "=";
     }
 
+    @Override
     public String toString() {
         String lhsStr = "";
         String rhsStr = "";

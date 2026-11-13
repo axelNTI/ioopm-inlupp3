@@ -7,6 +7,7 @@ public abstract class Unary extends SymbolicExpression {
         this.primary = primary;
     }
 
+    @Override 
     public String toString() {
 
         if (FunctionInterface.class.isAssignableFrom(getClass())) {
@@ -17,6 +18,7 @@ public abstract class Unary extends SymbolicExpression {
         return ExpressionInterface.getFormat(getName(), args);
     }
 
+    @Override 
     public boolean equals(Object other) {
         if (other instanceof Unary) {
             return this.equals((Unary) other);

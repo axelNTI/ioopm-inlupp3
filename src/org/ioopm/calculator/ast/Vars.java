@@ -12,6 +12,7 @@ public class Vars extends Command {
         return theInstance;
     }
 
+    @Override 
     public void execute(Environment vars, Statistics stats) {
         for (Variable key : vars.keySet()) {
             System.out.println("%s = %s".formatted(key, vars.get(key)));

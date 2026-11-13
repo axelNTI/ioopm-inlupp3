@@ -7,10 +7,12 @@ public class Exp extends Unary implements FunctionInterface {
         this.priority = 90;
     }
 
+    @Override 
     public String getName() {
         return "Exp";
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg = this.primary.eval(vars);
 

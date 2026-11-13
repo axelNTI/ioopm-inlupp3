@@ -8,10 +8,12 @@ public class Variable extends Atom {
         this.priority = 150;
     }
 
+    @Override 
     public String toString() {
         return this.identifier;
     }
 
+    @Override 
     public boolean equals(Object other) {
         if (other instanceof Variable) {
             return this.equals((Variable) other);
@@ -24,6 +26,7 @@ public class Variable extends Atom {
         return this.identifier.compareTo(other.identifier) == 0;
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg = vars.get(this);
 
@@ -38,6 +41,7 @@ public class Variable extends Atom {
         return new Constant(arg.getValue());
     }
 
+    @Override 
     public int hashCode() {
         return identifier.hashCode();
     }

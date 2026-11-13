@@ -10,10 +10,12 @@ public class NamedConstant extends Atom {
         this.priority = 150;
     }
 
+    @Override 
     public String toString() {
         return this.name;
     }
 
+    @Override 
     public boolean equals(Object other) {
         if (other instanceof NamedConstant) {
             return this.equals((NamedConstant) other);
@@ -26,6 +28,7 @@ public class NamedConstant extends Atom {
         return this.name.compareTo(other.name) == 0;
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         return new Constant(value);
     }

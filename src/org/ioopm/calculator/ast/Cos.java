@@ -7,10 +7,12 @@ public class Cos extends Unary implements FunctionInterface {
         this.priority = 90;
     }
 
+    @Override 
     public String getName() {
         return "Cos";
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg = this.primary.eval(vars);
 
