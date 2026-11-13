@@ -34,6 +34,16 @@ public class TestSuite {
         ToStringTests.testNestedExpression();
         ToStringTests.testUnaryExpression();
 
+        PriorityTests.testPriority();
+
+        IsCommandTests.testIsCommand();
+
+        GetNameTests.testGetName();
+
+        IsConstantTests.testIsConstant();
+
+        GetValueTests.testGetValue();
+
         System.out.println("Tests done");
     }
 }
