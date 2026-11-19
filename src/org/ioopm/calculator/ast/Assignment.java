@@ -31,6 +31,7 @@ public class Assignment extends Binary {
         return lhsStr + " = " + rhsStr;
     }
 
+    @Override 
     public SymbolicExpression eval(Environment vars) {
         SymbolicExpression lhs = this.lhs.eval(vars);
 
