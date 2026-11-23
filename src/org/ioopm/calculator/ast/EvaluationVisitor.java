@@ -125,7 +125,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Variable n) {
-        SymbolicExpression arg = this.env.get(n).accept(this);
+        SymbolicExpression arg = this.env.get(n);
 
         if (arg == null) {
             return n;
@@ -139,15 +139,11 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Constant n) {
-        SymbolicExpression arg = n.accept(this);
-
-        return arg;
+        return n;
     }
 
     public SymbolicExpression visit(NamedConstant n) {
-        SymbolicExpression arg = n.accept(this);
-
-        return new Constant(arg.getValue());
+        return new Constant(n.getValue());
     }
 
     public SymbolicExpression visit(Vars n) {
