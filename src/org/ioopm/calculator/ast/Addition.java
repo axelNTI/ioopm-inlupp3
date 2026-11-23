@@ -23,4 +23,9 @@ public class Addition extends Binary implements  ExpressionInterface {
 
         return new Addition(lhs, rhs);
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

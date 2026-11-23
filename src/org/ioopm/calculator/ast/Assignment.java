@@ -42,4 +42,9 @@ public class Assignment extends Binary {
 
         throw new IllegalAssignmentException("Can not assign to anything other than variables");
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

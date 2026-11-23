@@ -18,4 +18,9 @@ public class Quit extends Command {
         sc.close();
         System.exit(0);
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

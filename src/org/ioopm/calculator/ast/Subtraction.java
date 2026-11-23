@@ -23,4 +23,9 @@ public class Subtraction extends Binary {
 
         return new Subtraction(lhs, rhs);
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

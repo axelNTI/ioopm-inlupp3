@@ -23,4 +23,11 @@ public class Multiplication extends Binary implements ExpressionInterface {
 
         return new Multiplication(lhs, rhs);
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
+
 }
+

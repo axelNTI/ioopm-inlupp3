@@ -44,4 +44,9 @@ public class Division extends Binary implements ExpressionInterface {
 
         return new Division(lhs, rhs);
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

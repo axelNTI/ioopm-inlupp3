@@ -18,4 +18,9 @@ public class Vars extends Command {
             System.out.println("%s = %s".formatted(key, vars.get(key)));
         }
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

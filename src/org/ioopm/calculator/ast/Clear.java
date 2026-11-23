@@ -15,4 +15,9 @@ public class Clear extends Command {
         vars.clear();
         System.out.println("Cleared variables");
     }
+
+    @Override 
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }
