@@ -1,26 +1,14 @@
 package tests;
 
-import org.ioopm.calculator.ast.Addition;
-import org.ioopm.calculator.ast.Assignment;
-import org.ioopm.calculator.ast.Clear;
-import org.ioopm.calculator.ast.Constant;
-import org.ioopm.calculator.ast.Cos;
-import org.ioopm.calculator.ast.Division;
-import org.ioopm.calculator.ast.Exp;
-import org.ioopm.calculator.ast.Log;
-import org.ioopm.calculator.ast.Multiplication;
-import org.ioopm.calculator.ast.NamedConstant;
-import org.ioopm.calculator.ast.Negation;
-import org.ioopm.calculator.ast.Quit;
-import org.ioopm.calculator.ast.Sin;
-import org.ioopm.calculator.ast.Subtraction;
-import org.ioopm.calculator.ast.SymbolicExpression;
-import org.ioopm.calculator.ast.Variable;
-import org.ioopm.calculator.ast.Vars;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+
+import org.ioopm.calculator.ast.*;
 
 public class IsConstantTests {
 
-    public static void testIsConstant() {
+    @Test
+    public void testIsConstant() {
         SymbolicExpression assignment = new Assignment(new Constant(3), new Variable("x"));
         SymbolicExpression addition = new Addition(new Constant(3), new Constant(3));
         SymbolicExpression subtraction = new Subtraction(new Constant(7), new Constant(4));
@@ -39,22 +27,22 @@ public class IsConstantTests {
 
         SymbolicExpression constant = new Constant(5);
 
-        assert !assignment.isConstant() : "Assignment should not be a constant";
-        assert !addition.isConstant() : "Addition should not be a constant";
-        assert !subtraction.isConstant() : "Subtraction should not be a constant";
-        assert !division.isConstant() : "Division should not be a constant";
-        assert !multiplication.isConstant() : "Multiplication should not be a constant";
-        assert !cos.isConstant() : "Cos should not be a constant";
-        assert !exp.isConstant() : "Exp should not be a constant";
-        assert !log.isConstant() : "Log should not be a constant";
-        assert !sin.isConstant() : "Sin should not be a constant";
-        assert !negation.isConstant() : "Negation should not be a constant";
-        assert !namedConstant.isConstant() : "Named constant should not be a constant"; // Is our implementation really correct?
-        assert !variable.isConstant() : "Variable should not be a constant";
-        assert !clear.isConstant() : "Clear should not be a constant";
-        assert !quit.isConstant() : "Quit should not be a constant";
-        assert !vars.isConstant() : "Vars should not be a constant";
+        assertFalse(assignment.isConstant());
+        assertFalse(addition.isConstant());
+        assertFalse(subtraction.isConstant());
+        assertFalse(division.isConstant());
+        assertFalse(multiplication.isConstant());
+        assertFalse(cos.isConstant());
+        assertFalse(exp.isConstant());
+        assertFalse(log.isConstant());
+        assertFalse(sin.isConstant());
+        assertFalse(negation.isConstant());
+        assertFalse(namedConstant.isConstant());
+        assertFalse(variable.isConstant());
+        assertFalse(clear.isConstant());
+        assertFalse(quit.isConstant());
+        assertFalse(vars.isConstant());
 
-        assert constant.isConstant() : "Constant should be a constant";
+        assertTrue(constant.isConstant());
     }
 }

@@ -1,10 +1,14 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+
 import org.ioopm.calculator.ast.*;
 
 public class PriorityTests {
 
-    public static void testPriority() {
+    @Test
+    public void testPriority() {
         SymbolicExpression assignment = new Assignment(new Constant(3), new Variable("x"));
 
         SymbolicExpression addition = new Addition(new Constant(3), new Constant(3));
@@ -24,36 +28,29 @@ public class PriorityTests {
         SymbolicExpression namedConstant = new NamedConstant("Answer", 42.0);
         SymbolicExpression variable = new Variable("y");
 
-        assert assignment.getPriority() < addition.getPriority()
-                : "Assignment should have a lower priorty than addition";
+        assertTrue(assignment.getPriority() < addition.getPriority());
 
-        assert addition.getPriority() == subtraction.getPriority()
-                : "Addition and subtraction should have the same priority";
+        assertTrue(addition.getPriority() == subtraction.getPriority());
 
-        assert subtraction.getPriority() < division.getPriority()
-                : "Subtraction should have a lower priority than division";
+        assertTrue(subtraction.getPriority() < division.getPriority());
 
-        assert division.getPriority() == multiplication.getPriority()
-                : "Division and multiplication should have the same priority";
+        assertTrue(division.getPriority() == multiplication.getPriority());
 
-        assert multiplication.getPriority() < cos.getPriority()
-                : "Multiplication should have a lower priority than cos";
+        assertTrue(multiplication.getPriority() < cos.getPriority());
 
-        assert cos.getPriority() == exp.getPriority() : "Cos and exp should have the same priority";
+        assertTrue(cos.getPriority() == exp.getPriority());
 
-        assert exp.getPriority() == log.getPriority() : "Exp and cos should have the same priority";
+        assertTrue(exp.getPriority() == log.getPriority());
 
-        assert log.getPriority() == sin.getPriority() : "Log and sin should have the same priority";
+        assertTrue(log.getPriority() == sin.getPriority());
 
-        assert log.getPriority() < negation.getPriority() : "Log should have a lower priority than negation";
+        assertTrue(log.getPriority() < negation.getPriority());
 
-        assert negation.getPriority() < constant.getPriority() : "Negation should have a lower priority than constants";
+        assertTrue(negation.getPriority() < constant.getPriority());
 
-        assert constant.getPriority() == namedConstant.getPriority()
-                : "Constants and named constants should have the same priority";
+        assertTrue(constant.getPriority() == namedConstant.getPriority());
 
-        assert namedConstant.getPriority() == variable.getPriority()
-                : "Named constants and variables should have the same priority";
+        assertTrue(namedConstant.getPriority() == variable.getPriority());
 
     }
 
