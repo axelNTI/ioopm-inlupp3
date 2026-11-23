@@ -21,6 +21,6 @@ Please enter an expression: ( 3 + y ) * 10 * y
 Please enter an expression: 1 / ( 2 * y )
 Please enter an expression: -( 2 + y )
 Please enter an expression: Quitting
-Please enter an expression: Total number of expressions: 19
+Total number of expressions: 19
 Total successful evaluations: 19
 Total fully evaluated: 16
