@@ -13,18 +13,6 @@ public class Subtraction extends Binary {
     }
 
     @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression lhs = this.lhs.eval(vars);
-        SymbolicExpression rhs = this.rhs.eval(vars);
-
-        if (lhs.isConstant() && rhs.isConstant()) {
-            return new Constant(lhs.getValue() - rhs.getValue());
-        }
-
-        return new Subtraction(lhs, rhs);
-    }
-
-    @Override 
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);
     }

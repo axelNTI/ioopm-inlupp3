@@ -32,20 +32,6 @@ public class Division extends Binary implements ExpressionInterface {
     }
 
     @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression lhs = this.lhs.eval(vars);
-        SymbolicExpression rhs = this.rhs.eval(vars);
-
-        if (lhs.isConstant() && rhs.isConstant()) {
-            if (rhs.getValue() == 0) throw new InvalidInputException("Can't divide by 0");
-
-            return new Constant(lhs.getValue() / rhs.getValue());
-        }
-
-        return new Division(lhs, rhs);
-    }
-
-    @Override 
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);
     }

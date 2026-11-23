@@ -32,18 +32,6 @@ public class Assignment extends Binary {
     }
 
     @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression lhs = this.lhs.eval(vars);
-
-        if (rhs instanceof Variable) {
-            vars.put((Variable) rhs, lhs);
-            return lhs;
-        }
-
-        throw new IllegalAssignmentException("Can not assign to anything other than variables");
-    }
-
-    @Override 
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);
     }
