@@ -12,21 +12,6 @@ public class Log extends Unary implements FunctionInterface {
         return "Log";
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression arg = this.primary.eval(vars);
-
-        if (!arg.isConstant()) {
-            return new Log(arg);
-        }
-
-        if (arg.getValue() <= 0) {
-            throw new InvalidInputException("Can not log <= 0");
-        }
-
-        return new Constant(Math.log(arg.getValue()));
-    }
-
     @Override
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);

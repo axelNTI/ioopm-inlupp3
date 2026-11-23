@@ -12,17 +12,6 @@ public class Cos extends Unary implements FunctionInterface {
         return "Cos";
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression arg = this.primary.eval(vars);
-
-        if (!arg.isConstant()) {
-            return new Cos(arg);
-        }
-
-        return new Constant(Math.cos(arg.getValue()));
-    }
-
     @Override
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);

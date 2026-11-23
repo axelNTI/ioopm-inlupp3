@@ -12,17 +12,6 @@ public class Negation extends Unary implements ExpressionInterface {
         return "-";
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression arg = this.primary.eval(vars);
-
-        if (!arg.isConstant()) {
-            return new Negation(arg);
-        }
-
-        return new Constant(-(arg.getValue()));
-    }
-
     @Override
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);

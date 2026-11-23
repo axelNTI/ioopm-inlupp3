@@ -27,21 +27,6 @@ public class Variable extends Atom {
     }
 
     @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression arg = vars.get(this);
-
-        if (arg == null) {
-            return this;
-        }
-
-        if (!arg.isConstant()) {
-            return arg;
-        }
-
-        return new Constant(arg.getValue());
-    }
-
-    @Override 
     public int hashCode() {
         return identifier.hashCode();
     }

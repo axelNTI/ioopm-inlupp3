@@ -12,17 +12,6 @@ public class Sin extends Unary implements FunctionInterface {
         return "Sin";
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars) {
-        SymbolicExpression arg = this.primary.eval(vars);
-
-        if (!arg.isConstant()) {
-            return new Sin(arg);
-        }
-
-        return new Constant(Math.sin(arg.getValue()));
-    }
-
     @Override
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);

@@ -28,11 +28,6 @@ public class NamedConstant extends Atom {
         return this.name.compareTo(other.name) == 0;
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars) {
-        return new Constant(value);
-    }
-
     @Override
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);
