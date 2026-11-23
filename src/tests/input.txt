@@ -1,0 +1,26 @@
+1 + 2
+3 - 2
+3 * 2
+21 / 4
+9 = x
+Sin(0)
+Cos(0)
+Exp(0)
+Log(1)
+-4
+x
+3
+Answer
+pi
+e
+L
+Vars
+Clear
+( 3 + y ) * ( 10 * y )
+1 / (2 * y)
+-( 2 + y )
+0 / 0
+( 1 + 1
+4 = Vars
+3 = pi
+Quit
