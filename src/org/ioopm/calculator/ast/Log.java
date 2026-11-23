@@ -26,4 +26,9 @@ public class Log extends Unary implements FunctionInterface {
 
         return new Constant(Math.log(arg.getValue()));
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

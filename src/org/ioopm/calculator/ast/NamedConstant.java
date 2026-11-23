@@ -32,4 +32,9 @@ public class NamedConstant extends Atom {
     public SymbolicExpression eval(Environment vars) {
         return new Constant(value);
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

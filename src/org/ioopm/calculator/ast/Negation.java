@@ -22,4 +22,9 @@ public class Negation extends Unary implements ExpressionInterface {
 
         return new Constant(-(arg.getValue()));
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

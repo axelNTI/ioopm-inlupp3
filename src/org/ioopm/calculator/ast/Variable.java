@@ -45,4 +45,9 @@ public class Variable extends Atom {
     public int hashCode() {
         return identifier.hashCode();
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

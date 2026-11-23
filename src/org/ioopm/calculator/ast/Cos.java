@@ -22,4 +22,9 @@ public class Cos extends Unary implements FunctionInterface {
 
         return new Constant(Math.cos(arg.getValue()));
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

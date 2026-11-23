@@ -22,4 +22,9 @@ public class Exp extends Unary implements FunctionInterface {
 
         return new Constant(Math.exp(arg.getValue()));
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }

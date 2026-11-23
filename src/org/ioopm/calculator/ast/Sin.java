@@ -22,4 +22,9 @@ public class Sin extends Unary implements FunctionInterface {
 
         return new Constant(Math.sin(arg.getValue()));
     }
+
+    @Override
+    public SymbolicExpression accept(Visitor v) {
+        return v.visit(this);
+    }
 }
