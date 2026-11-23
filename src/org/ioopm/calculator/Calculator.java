@@ -8,6 +8,7 @@ public class Calculator {
     private static final CalculatorParser parser = new CalculatorParser();
     private static final Environment vars = new Environment();
     private static final Statistics stats = new Statistics();
+    private static final EvaluationVisitor visitor = new EvaluationVisitor();
 
     public static void main(String[] args) {
 
@@ -25,7 +26,7 @@ public class Calculator {
                     continue;
                 }
                 stats.addNoExpressions();
-                SymbolicExpression evaluated = expr.eval(vars);
+                SymbolicExpression evaluated = visitor.evaluate(expr, vars);
                 vars.put(new Variable("ans"), evaluated);
                 System.out.println(evaluated);
 

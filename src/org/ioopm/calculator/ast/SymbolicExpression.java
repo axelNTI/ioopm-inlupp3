@@ -34,7 +34,5 @@ public abstract class SymbolicExpression {
         throw new RuntimeException("Tried to run execute on non-commands");
     } 
 
-    public SymbolicExpression accept(Visitor v) {
-        return v.visit(this);
-    }
+    public abstract SymbolicExpression accept(Visitor v);
 }
