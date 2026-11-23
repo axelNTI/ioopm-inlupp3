@@ -22,10 +22,6 @@ public abstract class SymbolicExpression {
         throw new RuntimeException("getValue() called on expression that is not a constant");
     }
 
-    public SymbolicExpression eval(Environment vars) {
-        throw new InvalidInputException("Can't Evalutate");
-    }
-
     public boolean isCommand() {
         return false;
     }
