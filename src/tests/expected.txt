@@ -17,9 +17,9 @@ Please enter an expression: 6.022140857E23
 Please enter an expression: ans = 6.022140857E23
 x = 9.0
 Please enter an expression: Cleared variables
-Please enter an expression: ( 3 + y ) * 10 * y
-Please enter an expression: 1 / ( 2 * y )
-Please enter an expression: -( 2 + y )
+Please enter an expression: ( 3.0 + y ) * 10.0 * y
+Please enter an expression: 1.0 / ( 2.0 * y )
+Please enter an expression: -( 2.0 + y )
 Please enter an expression: Quitting
 Total number of expressions: 19
 Total successful evaluations: 19
