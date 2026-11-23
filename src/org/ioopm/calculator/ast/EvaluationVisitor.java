@@ -62,8 +62,8 @@ public class EvaluationVisitor implements Visitor {
         SymbolicExpression right = n.rhs().accept(this);
 
         if (right instanceof Variable) {
-            this.env.put((Variable) rhs, lhs);
-            return lhs;
+            this.env.put((Variable) right, left);
+            return left;
         }
 
         throw new IllegalAssignmentException("Can not assign to anything other than variables");
