@@ -37,4 +37,9 @@ public class NamedConstant extends Atom {
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);
     }
+
+    @Override
+    public double getValue() {
+        return this.value;
+    }
 }
