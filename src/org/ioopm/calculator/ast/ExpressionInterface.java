@@ -2,16 +2,28 @@ package org.ioopm.calculator.ast;
 
 public interface ExpressionInterface {
 
-    static public String getFormat(String name, SymbolicExpression[] args) {
+    static public String getFormat(SymbolicExpression current, SymbolicExpression[] args) {
         if (args.length == 1) {
             if (args[0] instanceof Binary) {
-                return name + "( %s )".formatted(args[0]);
+                return current.getName() + "( %s )".formatted(args[0]);
             }
-            return name + "%s".formatted(args[0]);
+            return current.getName() + "%s".formatted(args[0]);
         }
-        else 
-        {
-            return "%s ".formatted(args[0]) + name + " %s".formatted(args[1]);
+        
+        String lhsStr = "";
+        String rhsStr = "";
+        if (args[0].priority < current.priority) {
+            lhsStr = "( " + args[0] + " )";
+        } else {
+            lhsStr = args[0].toString();
         }
+
+        if (args[1].priority < current.priority) {
+            rhsStr = "( " + args[1] + " )";
+        } else {
+            rhsStr = args[1].toString();
+        }
+
+        return lhsStr + " " + current.getName() + " " + rhsStr;
     }
 } 

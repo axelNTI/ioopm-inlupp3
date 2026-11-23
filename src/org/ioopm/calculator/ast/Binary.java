@@ -21,7 +21,7 @@ public abstract class Binary extends SymbolicExpression {
     @Override 
     public String toString() {
         SymbolicExpression[] args = {lhs, rhs};
-        return ExpressionInterface.getFormat(getName(), args);
+        return ExpressionInterface.getFormat(this, args);
     }
 
     public boolean equals(Binary other) {

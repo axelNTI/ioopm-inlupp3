@@ -15,7 +15,7 @@ public abstract class Unary extends SymbolicExpression {
             return FunctionInterface.getFormat(getName(), args);
         }
         SymbolicExpression[] args = { primary };
-        return ExpressionInterface.getFormat(getName(), args);
+        return ExpressionInterface.getFormat(this, args);
     }
 
     @Override 
