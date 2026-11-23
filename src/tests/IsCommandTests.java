@@ -1,10 +1,13 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 import org.ioopm.calculator.ast.*;
 
 public class IsCommandTests {
 
-    public static void testIsCommand() {
+    @Test
+    public void testIsCommand() {
         SymbolicExpression assignment = new Assignment(new Constant(3), new Variable("x"));
         SymbolicExpression addition = new Addition(new Constant(3), new Constant(3));
         SymbolicExpression subtraction = new Subtraction(new Constant(7), new Constant(4));
@@ -23,23 +26,23 @@ public class IsCommandTests {
         SymbolicExpression quit = Quit.instance();
         SymbolicExpression vars = Vars.instance();
 
-        assert !assignment.isCommand() : "Assignment should not be a command";
-        assert !addition.isCommand() : "Addition should not be a command";
-        assert !subtraction.isCommand() : "Subtraction should not be a command";
-        assert !division.isCommand() : "Division should not be a command";
-        assert !multiplication.isCommand() : "Multiplication should not be a command";
-        assert !cos.isCommand() : "Cos should not be a command";
-        assert !exp.isCommand() : "Exp should not be a command";
-        assert !log.isCommand() : "Log should not be a command";
-        assert !sin.isCommand() : "Sin should not be a command";
-        assert !negation.isCommand() : "Negation should not be a command";
-        assert !constant.isCommand() : "Constant should not be a command";
-        assert !namedConstant.isCommand() : "NamedConstant should not be a command";
-        assert !variable.isCommand() : "Variable should not be a command";
+        assertFalse(assignment.isCommand(), "Assignment should not be a command");
+        assertFalse(addition.isCommand(), "Addition should not be a command");
+        assertFalse(subtraction.isCommand(), "Subtraction should not be a command");
+        assertFalse(division.isCommand(), "Division should not be a command");
+        assertFalse(multiplication.isCommand(), "Multiplication should not be a command");
+        assertFalse(cos.isCommand(), "Cos should not be a command");
+        assertFalse(exp.isCommand(), "Exp should not be a command");
+        assertFalse(log.isCommand(), "Log should not be a command");
+        assertFalse(sin.isCommand(), "Sin should not be a command");
+        assertFalse(negation.isCommand(), "Negation should not be a command");
+        assertFalse(constant.isCommand(), "Constant should not be a command");
+        assertFalse(namedConstant.isCommand(), "NamedConstant should not be a command");
+        assertFalse(variable.isCommand(), "Variable should not be a command");
 
-        assert clear.isCommand() : "Clear should be a command";
-        assert quit.isCommand() : "Quit should be a command";
-        assert vars.isCommand() : "Vars should be a command";
+        assertTrue(clear.isCommand(), "Clear should be a command");
+        assertTrue(quit.isCommand(), "Quit should be a command");
+        assertTrue(vars.isCommand(), "Vars should be a command");
     }
 
 }
