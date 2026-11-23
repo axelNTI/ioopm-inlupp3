@@ -1,7 +1,7 @@
 package org.ioopm.calculator.ast;
 
 import org.ioopm.calculator.Statistics;
-
+import java.util.Scanner;
 public class Vars extends Command {
     private static final Vars theInstance = new Vars();
 
@@ -13,7 +13,7 @@ public class Vars extends Command {
     }
 
     @Override 
-    public void execute(Environment vars, Statistics stats) {
+    public void execute(Environment vars, Statistics stats, Scanner sc) {
         for (Variable key : vars.keySet()) {
             System.out.println("%s = %s".formatted(key, vars.get(key)));
         }

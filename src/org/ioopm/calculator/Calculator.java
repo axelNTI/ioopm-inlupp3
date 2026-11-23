@@ -2,6 +2,7 @@ package org.ioopm.calculator;
 
 import org.ioopm.calculator.parser.*;
 import org.ioopm.calculator.ast.*;
+import java.util.Scanner;
 
 public class Calculator {
     private static final CalculatorParser parser = new CalculatorParser();
@@ -10,16 +11,17 @@ public class Calculator {
 
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
 
-        while(true) {
-            
+        while (true) {
+
             try {
                 System.out.print("Please enter an expression: ");
-                String input = System.console().readLine();
+                String input = sc.nextLine();
                 SymbolicExpression expr = parser.parse(input, vars);
 
                 if (expr.isCommand()) {
-                    expr.execute(vars, stats);
+                    expr.execute(vars, stats, sc);
                     continue;
                 }
                 stats.addNoExpressions();
@@ -35,7 +37,7 @@ public class Calculator {
             catch (Exception e) {
                 System.err.println(e);
             }
-            
+
         }
     }
 }
