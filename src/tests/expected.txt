@@ -1,0 +1,30 @@
+3.0
+1.0
+6.0
+5.25
+9.0
+0.0
+1.0
+1.0
+0.0
+-4.0
+9.0
+3.0
+42.0
+3.141592653589793
+2.718281828459045
+6.022140857E23
+ans = 6.022140857E23
+x = 9.0
+Cleared variables
+( 3 + y ) * 10 * y
+1 / ( 2 * y )
+-( 2 + y )
+org.ioopm.calculator.ast.InvalidInputException: Can't divide by 0
+org.ioopm.calculator.parser.SyntaxErrorException: expected ')'
+org.ioopm.calculator.parser.IllegalExpressionException: Error: cannot redefine Vars
+org.ioopm.calculator.ast.IllegalAssignmentException: Can not assign to anything other than variables
+Quitting
+Total number of expressions: 21
+Total successful evaluations: 19
+Total fully evaluated: 16
