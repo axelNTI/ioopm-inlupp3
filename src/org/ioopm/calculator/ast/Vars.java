@@ -14,9 +14,7 @@ public class Vars extends Command {
 
     @Override 
     public void execute(Environment vars, Statistics stats, Scanner sc) {
-        for (Variable key : vars.keySet()) {
-            System.out.println("%s = %s".formatted(key, vars.get(key)));
-        }
+        System.out.println(vars);
     }
 
     @Override 

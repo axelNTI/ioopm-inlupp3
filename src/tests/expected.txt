@@ -14,8 +14,7 @@ Please enter an expression: 42.0
 Please enter an expression: 3.141592653589793
 Please enter an expression: 2.718281828459045
 Please enter an expression: 6.022140857E23
-Please enter an expression: ans = 6.022140857E23
-x = 9.0
+Please enter an expression: Variables: ans = 6.022140857E23, x = 9.0
 Please enter an expression: Cleared variables
 Please enter an expression: ( 3.0 + y ) * 10.0 * y
 Please enter an expression: 1.0 / ( 2.0 * y )
