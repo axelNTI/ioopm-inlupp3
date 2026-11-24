@@ -25,13 +25,27 @@ public class CalculatorParser {
     private static String LOG = "Log";
     private static String EXP = "Exp";
     private static char ASSIGNMENT = '=';
+    private static String IF = "if";
+    private static String ELSE = "else";
+    private static String LT = "<";
+    private static String GT = ">";
+    private static String LTE = "<=";
+    private static String GTE = ">=";
+    private static String EQ = "==";
 
     // unallowerdVars is used to check if variabel name that we
     // want to assign new meaning to is a valid name eg 3 = Quit
     // or 10 + x = L is not allowed
     private final ArrayList<String> unallowedVars = new ArrayList<String>(Arrays.asList("Quit",
             "Vars",
-            "Clear"));
+            "Clear",
+            SIN,
+            COS,
+            EXP,
+            LOG,
+            NEG,
+            IF,
+            ELSE));
 
     /**
      * Used to parse the inputted string by the Calculator program
@@ -86,6 +100,50 @@ public class CalculatorParser {
             }
         }
         return result;
+    }
+
+    private SymbolicExpression ifStatement() throws IOException {
+        this.st.nextToken();
+        SymbolicExpression identifier1 = identifier();
+
+        this.st.nextToken();
+        if (!(this.st.sval.equals(LT) || this.st.sval.equals(GT) || this.st.sval.equals(LTE) || this.st.sval.equals(GTE)
+                || this.st.sval.equals(EQ))) {
+            throw new SyntaxErrorException("Invalid operator used");
+        }
+        String operator = this.st.sval;
+
+
+        this.st.nextToken();
+        SymbolicExpression identifier2 = identifier();
+
+        if (this.st.nextToken() != '{') {
+            throw new SyntaxErrorException("expected '{'");
+        }
+
+        Scope ifExpression = new Scope(assignment());
+
+        if (this.st.nextToken() != '}') {
+            throw new SyntaxErrorException("expected '}'");
+        }
+
+        this.st.nextToken();
+
+        if (!this.st.sval.equals(ELSE)) {
+            throw new SyntaxErrorException("expected 'else'");
+        }
+
+        if (this.st.nextToken() != '{') {
+            throw new SyntaxErrorException("expected '{'");
+        }
+
+        Scope elseExpression = new Scope(assignment());
+
+        if (this.st.nextToken() != '}') {
+            throw new SyntaxErrorException("expected '}'");
+        }
+
+        return new Conditional(identifier1, identifier2, operator, ifExpression, elseExpression);
     }
 
     /**
@@ -228,7 +286,9 @@ public class CalculatorParser {
      */
     private SymbolicExpression primary() throws IOException {
         SymbolicExpression result;
-        if (this.st.ttype == '(') {
+        if (this.st.ttype == this.st.TT_WORD && this.st.sval.equals(IF)) {
+            result = ifStatement();
+        } else if (this.st.ttype == '(') {
             this.st.nextToken();
             result = assignment();
             /// This captures unbalanced parentheses!
