@@ -102,24 +102,44 @@ public class CalculatorParser {
         return result;
     }
 
+    private String getOperator() throws IOException {
+        String op = "";
+        if (this.st.ttype == '<') {
+            op = "<";
+        } else if (this.st.ttype == '>') {
+            op = ">";
+        } else if (this.st.ttype == '=') {
+            op = "=";
+        }
+
+        if (op.length() != 1) {
+            throw new SyntaxErrorException("Invalid operator used");
+        }
+
+        this.st.nextToken();
+
+        if (this.st.ttype == '=') {
+            op = op + "=";
+            this.st.nextToken();
+        }
+
+        return op;
+    }
+
     private SymbolicExpression ifStatement() throws IOException {
         this.st.nextToken();
         SymbolicExpression identifier1 = identifier();
-
         this.st.nextToken();
-        if (!(this.st.sval.equals(LT) || this.st.sval.equals(GT) || this.st.sval.equals(LTE) || this.st.sval.equals(GTE)
-                || this.st.sval.equals(EQ))) {
-            throw new SyntaxErrorException("Invalid operator used");
-        }
-        String operator = this.st.sval;
 
+        String operator = getOperator();
 
-        this.st.nextToken();
         SymbolicExpression identifier2 = identifier();
 
         if (this.st.nextToken() != '{') {
             throw new SyntaxErrorException("expected '{'");
         }
+
+        this.st.nextToken();
 
         Scope ifExpression = new Scope(assignment());
 
@@ -136,6 +156,8 @@ public class CalculatorParser {
         if (this.st.nextToken() != '{') {
             throw new SyntaxErrorException("expected '{'");
         }
+
+        this.st.nextToken();
 
         Scope elseExpression = new Scope(assignment());
 
