@@ -3,7 +3,8 @@ package org.ioopm.calculator.ast;
 import java.util.LinkedList;
 
 public class ReassignmentChecker implements Visitor {
-    protected LinkedList<String> variables;
+    protected LinkedList<LinkedList<String>> variables;
+    protected boolean duplicates;
 
     @Override
     public SymbolicExpression visit(Addition n) {
@@ -19,7 +20,7 @@ public class ReassignmentChecker implements Visitor {
         n.rhs().accept(this);
 
         if (n.rhs().isVariable()) {
-            this.variables.addLast("Error, the variable %s is reassigned".formatted(n.rhs()));
+            this.variables.peek().push("Error, the variable %s is reassigned".formatted(n.rhs()));
         }
 
         return null;
@@ -116,7 +117,20 @@ public class ReassignmentChecker implements Visitor {
 
     @Override
     public SymbolicExpression visit(Scope n) {
+        variables.push(new LinkedList<String>());
         n.getExpr().accept(this);
+        LinkedList<String> scope = variables.pop();
+        LinkedList<String> list = new LinkedList<String>();
+
+        for (String str : scope) {
+            if (list.contains(str)) {
+                System.out.println(str);
+                continue;
+            }
+            list.addLast(str);
+        }
+
+        this.duplicates = scope.size() != list.size();
 
         return null;
     }

@@ -29,19 +29,23 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public boolean checkReassignment(SymbolicExpression topLevel) {
-        reassignmentChecker.variables = new LinkedList<String>();
-        LinkedList<String> list = new LinkedList<String>();
+        reassignmentChecker.duplicates = false;
+        reassignmentChecker.variables = new LinkedList<LinkedList<String>>();
+        reassignmentChecker.variables.push(new LinkedList<String>());
         topLevel.accept(reassignmentChecker);
 
-        for (String str : reassignmentChecker.variables) {
+        LinkedList<String> scope = reassignmentChecker.variables.pop();
+        LinkedList<String> list = new LinkedList<String>();
+
+        for (String str : scope) {
             if (list.contains(str)) {
                 System.out.println(str);
                 continue;
             }
             list.addLast(str);
         }
-
-        return reassignmentChecker.variables.size() == list.size();
+        
+        return !reassignmentChecker.duplicates && scope.size() == list.size();
     }
 
     public SymbolicExpression visit(Addition n) {
