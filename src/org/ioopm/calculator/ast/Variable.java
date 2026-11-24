@@ -40,4 +40,9 @@ public class Variable extends Atom implements Comparable<Variable> {
     public int compareTo(Variable other) {
         return this.identifier.compareTo(other.identifier);
     }
+
+    @Override
+    public boolean isVariable() {
+        return true;
+    }
 }

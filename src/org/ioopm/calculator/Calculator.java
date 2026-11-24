@@ -28,7 +28,7 @@ public class Calculator {
 
                 stats.addNoExpressions();
 
-                if (!visitor.check(expr)) {
+                if (!visitor.check(expr) || !visitor.checkReassignment(expr)) {
                     continue;
                 }
 

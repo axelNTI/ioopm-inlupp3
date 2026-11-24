@@ -35,4 +35,8 @@ public abstract class SymbolicExpression {
     public boolean isNamedConstant() {
         return false;
     }
+
+    public boolean isVariable() {
+        return false;
+    }
 }

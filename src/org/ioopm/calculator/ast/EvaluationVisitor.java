@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public class EvaluationVisitor implements Visitor {
     private Environment env = null;
     private NamedConstantChecker checker = new NamedConstantChecker();
+    private ReassignmentChecker reassignmentChecker = new ReassignmentChecker();
 
     public SymbolicExpression evaluate(SymbolicExpression topLevel, Environment env) {
         this.env = env;
@@ -25,6 +26,22 @@ public class EvaluationVisitor implements Visitor {
         }
 
         return false;
+    }
+
+    public boolean checkReassignment(SymbolicExpression topLevel) {
+        reassignmentChecker.variables = new LinkedList<String>();
+        LinkedList<String> list = new LinkedList<String>();
+        topLevel.accept(reassignmentChecker);
+
+        for (String str : reassignmentChecker.variables) {
+            if (list.contains(str)) {
+                System.out.println(str);
+                continue;
+            }
+            list.addLast(str);
+        }
+
+        return reassignmentChecker.variables.size() == list.size();
     }
 
     public SymbolicExpression visit(Addition n) {
