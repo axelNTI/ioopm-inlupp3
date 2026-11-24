@@ -37,4 +37,9 @@ public class NamedConstant extends Atom {
     public double getValue() {
         return this.value;
     }
+
+    @Override
+    public boolean isNamedConstant() {
+        return true;
+    }
 }

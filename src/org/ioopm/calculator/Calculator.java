@@ -25,7 +25,13 @@ public class Calculator {
                     expr.execute(vars, stats, sc);
                     continue;
                 }
+
                 stats.addNoExpressions();
+
+                if (!visitor.check(expr)) {
+                    continue;
+                }
+
                 SymbolicExpression evaluated = visitor.evaluate(expr, vars);
                 vars.put(new Variable("ans"), evaluated);
                 System.out.println(evaluated);

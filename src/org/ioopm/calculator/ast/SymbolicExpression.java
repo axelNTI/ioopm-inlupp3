@@ -31,4 +31,8 @@ public abstract class SymbolicExpression {
     } 
 
     public abstract SymbolicExpression accept(Visitor v);
+
+    public boolean isNamedConstant() {
+        return false;
+    }
 }

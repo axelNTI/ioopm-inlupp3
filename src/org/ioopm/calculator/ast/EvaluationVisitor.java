@@ -1,15 +1,34 @@
 package org.ioopm.calculator.ast;
 
+import java.util.LinkedList;
+
 public class EvaluationVisitor implements Visitor {
-   private Environment env = null;
+    private Environment env = null;
+    private NamedConstantChecker checker = new NamedConstantChecker();
 
     public SymbolicExpression evaluate(SymbolicExpression topLevel, Environment env) {
         this.env = env;
         return topLevel.accept(this);
     }
 
+    public boolean check(SymbolicExpression topLevel) {
+        checker.exceptions = new LinkedList<String>();
+        topLevel.accept(checker);
+
+        if (checker.exceptions.size() == 0) {
+            return true;
+        }
+
+        System.out.println("Error, assignments to named constants:");
+        while (checker.exceptions.size() > 0) {
+            System.out.println("    %s".formatted(checker.exceptions.removeFirst()));
+        }
+
+        return false;
+    }
+
     public SymbolicExpression visit(Addition n) {
-        
+
         SymbolicExpression left = n.lhs().accept(this);
         SymbolicExpression right = n.rhs().accept(this);
 
@@ -21,7 +40,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Subtraction n) {
-        
+
         SymbolicExpression left = n.lhs().accept(this);
         SymbolicExpression right = n.rhs().accept(this);
 
@@ -33,7 +52,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Multiplication n) {
-        
+
         SymbolicExpression left = n.lhs().accept(this);
         SymbolicExpression right = n.rhs().accept(this);
 
@@ -45,7 +64,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Division n) {
-        
+
         SymbolicExpression left = n.lhs().accept(this);
         SymbolicExpression right = n.rhs().accept(this);
 
@@ -57,7 +76,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Assignment n) {
-        
+
         SymbolicExpression left = n.lhs().accept(this);
         SymbolicExpression right = n.rhs().accept(this);
 
@@ -81,7 +100,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Cos n) {
-        
+
         SymbolicExpression arg = n.primary().accept(this);
 
         if (!arg.isConstant()) {
@@ -92,7 +111,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Exp n) {
-        
+
         SymbolicExpression arg = n.primary().accept(this);
 
         if (!arg.isConstant()) {
@@ -103,7 +122,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Log n) {
-        
+
         SymbolicExpression arg = n.primary().accept(this);
 
         if (!arg.isConstant()) {
@@ -114,7 +133,7 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(Negation n) {
-        
+
         SymbolicExpression arg = n.primary().accept(this);
 
         if (!arg.isConstant()) {
