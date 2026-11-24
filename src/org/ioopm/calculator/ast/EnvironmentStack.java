@@ -4,10 +4,10 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class EnvironmentStack extends Environment {
-    private Stack<Environment> stack = null;
+    private Stack<Environment> stack = new Stack<Environment>();
 
     public EnvironmentStack() {
-
+        this.pushEnvironment();
     }
 
     @Override
