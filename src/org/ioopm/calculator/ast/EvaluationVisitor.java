@@ -7,8 +7,8 @@ public class EvaluationVisitor implements Visitor {
     private NamedConstantChecker checker = new NamedConstantChecker();
     private ReassignmentChecker reassignmentChecker = new ReassignmentChecker();
 
-    public SymbolicExpression evaluate(SymbolicExpression topLevel, EnvironmentStack env) {
-        this.env = env;
+    public SymbolicExpression evaluate(SymbolicExpression topLevel, Environment env) {
+        this.env = new EnvironmentStack(env);
         return topLevel.accept(this);
     }
 

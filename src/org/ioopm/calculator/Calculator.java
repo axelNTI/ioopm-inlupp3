@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Calculator {
     private static final CalculatorParser parser = new CalculatorParser();
-    private static final EnvironmentStack vars = new EnvironmentStack();
+    private static final Environment vars = new Environment();
     private static final Statistics stats = new Statistics();
     private static final EvaluationVisitor visitor = new EvaluationVisitor();
 
