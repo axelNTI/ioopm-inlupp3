@@ -5,6 +5,7 @@ public class Scope extends SymbolicExpression {
 
     public Scope(SymbolicExpression expr) {
         this.expr = expr;
+        this.priority = getPriority();
     }
 
     public SymbolicExpression getExpr() {
@@ -19,5 +20,10 @@ public class Scope extends SymbolicExpression {
     @Override 
     public String toString() {
         return expr.toString();
+    }
+
+    @Override 
+    public int getPriority() {
+        return expr.priority;
     }
 }
