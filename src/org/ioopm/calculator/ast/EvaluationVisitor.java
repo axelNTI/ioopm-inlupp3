@@ -3,11 +3,11 @@ package org.ioopm.calculator.ast;
 import java.util.LinkedList;
 
 public class EvaluationVisitor implements Visitor {
-    private Environment env = null;
+    private EnvironmentStack env = null;
     private NamedConstantChecker checker = new NamedConstantChecker();
     private ReassignmentChecker reassignmentChecker = new ReassignmentChecker();
 
-    public SymbolicExpression evaluate(SymbolicExpression topLevel, Environment env) {
+    public SymbolicExpression evaluate(SymbolicExpression topLevel, EnvironmentStack env) {
         this.env = env;
         return topLevel.accept(this);
     }
@@ -192,5 +192,18 @@ public class EvaluationVisitor implements Visitor {
 
     public SymbolicExpression visit(Quit n) {
         return n.accept(this);
+    }
+
+    public SymbolicExpression visit(Scope n) {
+
+        env.pushEnvironment();
+        SymbolicExpression arg = n.getExpr().accept(this);
+        env.popEnvironment();
+
+        if (!arg.isConstant()) {
+            return new Scope(arg);
+        }
+
+        return new Constant(arg.getValue());
     }
 }

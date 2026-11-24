@@ -114,4 +114,11 @@ public class ReassignmentChecker implements Visitor {
         return null;
     }
 
+    @Override
+    public SymbolicExpression visit(Scope n) {
+        n.getExpr().accept(this);
+
+        return null;
+    }
+
 }
