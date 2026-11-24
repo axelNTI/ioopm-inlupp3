@@ -208,4 +208,35 @@ public class EvaluationVisitor implements Visitor {
 
         return new Constant(arg.getValue());
     }
+
+    public SymbolicExpression visit(Conditional n) {
+        double id1 = ((Constant) n.getFirstIdentifier().accept(this)).getValue();
+        double id2 = ((Constant) n.getSecondIdentifier().accept(this)).getValue();
+        String op = n.getOperator();
+        // rename
+        boolean bool = false;
+
+        switch (op) {
+            case "<":
+                bool = id1 < id2;
+                break;
+            case ">":
+                bool = id1 > id2;
+                break;
+            case "<=":
+                bool = id1 <= id2;
+                break;
+            case ">=":
+                bool = id1 >= id2;
+                break;
+            case "==":
+                bool = id1 == id2;
+                break;
+        }
+
+        if (bool) {
+            return n.getFirstScope().accept(this);
+        }
+        return n.getSecondScope().accept(this);
+    }
 }

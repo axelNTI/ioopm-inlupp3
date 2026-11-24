@@ -17,5 +17,6 @@ public interface Visitor {
     public SymbolicExpression visit(Variable n);
     public SymbolicExpression visit(Vars n);
     public SymbolicExpression visit(NamedConstant n);
-    public SymbolicExpression visit(Scope scope);
+    public SymbolicExpression visit(Scope n);
+    public SymbolicExpression visit(Conditional n);
 }

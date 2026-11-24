@@ -121,4 +121,14 @@ public class NamedConstantChecker implements Visitor {
         return null;
     }
 
+    @Override 
+    public SymbolicExpression visit(Conditional n) {
+        n.getFirstIdentifier().accept(this);
+        n.getSecondIdentifier().accept(this);
+        n.getFirstScope().accept(this);
+        n.getSecondScope().accept(this);
+
+        return null;
+    }
+
 }
