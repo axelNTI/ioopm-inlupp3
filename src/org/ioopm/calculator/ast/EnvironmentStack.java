@@ -1,13 +1,13 @@
 package org.ioopm.calculator.ast;
 
 import java.util.Iterator;
-import java.util.Stack;
+import java.util.LinkedList;
 
 public class EnvironmentStack extends Environment {
-    private Stack<Environment> stack = new Stack<Environment>();
+    private LinkedList<Environment> stack = new LinkedList<Environment>();
 
-    public EnvironmentStack() {
-        this.pushEnvironment();
+    public EnvironmentStack(Environment root) {
+        stack.push(root);
     }
 
     @Override
