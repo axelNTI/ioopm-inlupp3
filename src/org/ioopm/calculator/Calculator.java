@@ -17,7 +17,7 @@ public class Calculator {
         while (true) {
 
             try {
-                System.out.print("Please enter an expression: ");
+                System.out.print("? ");
                 String input = sc.nextLine();
                 SymbolicExpression expr = parser.parse(input, vars);
 
@@ -40,8 +40,7 @@ public class Calculator {
                     stats.addNoFully();
                 }
                 stats.addNoSuccessful();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println(e);
             }
 

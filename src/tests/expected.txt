@@ -1,25 +1,25 @@
-Please enter an expression: 3.0
-Please enter an expression: 1.0
-Please enter an expression: 6.0
-Please enter an expression: 5.25
-Please enter an expression: 9.0
-Please enter an expression: 0.0
-Please enter an expression: 1.0
-Please enter an expression: 1.0
-Please enter an expression: 0.0
-Please enter an expression: -4.0
-Please enter an expression: 9.0
-Please enter an expression: 3.0
-Please enter an expression: 42.0
-Please enter an expression: 3.141592653589793
-Please enter an expression: 2.718281828459045
-Please enter an expression: 6.022140857E23
-Please enter an expression: Variables: ans = 6.022140857E23, x = 9.0
-Please enter an expression: Cleared variables
-Please enter an expression: ( 3.0 + y ) * 10.0 * y
-Please enter an expression: 1.0 / ( 2.0 * y )
-Please enter an expression: -( 2.0 + y )
-Please enter an expression: Quitting
+? 3.0
+? 1.0
+? 6.0
+? 5.25
+? 9.0
+? 0.0
+? 1.0
+? 1.0
+? 0.0
+? -4.0
+? 9.0
+? 3.0
+? 42.0
+? 3.141592653589793
+? 2.718281828459045
+? 6.022140857E23
+? Variables: ans = 6.022140857E23, x = 9.0
+? Cleared variables
+? ( 3.0 + y ) * 10.0 * y
+? 1.0 / ( 2.0 * y )
+? -( 2.0 + y )
+? Quitting
 Total number of expressions: 19
 Total successful evaluations: 19
 Total fully evaluated: 16
