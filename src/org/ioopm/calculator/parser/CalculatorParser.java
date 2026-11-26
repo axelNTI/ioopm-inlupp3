@@ -32,6 +32,13 @@ public class CalculatorParser {
     private static String LTE = "<=";
     private static String GTE = ">=";
     private static String EQ = "==";
+    private static String FUNCTION = "function";
+    private static String END = "end";
+    
+    private boolean functionMode = false;
+    private Variable name;
+    private LinkedList<Variable> parameters = new LinkedList<Variable>();
+    private LinkedList<SymbolicExpression> sequence = new LinkedList<SymbolicExpression>();
 
     // unallowerdVars is used to check if variabel name that we
     // want to assign new meaning to is a valid name eg 3 = Quit
@@ -62,7 +69,16 @@ public class CalculatorParser {
         this.st.ordinaryChar('/');
         this.st.eolIsSignificant(true);
         SymbolicExpression result = statement(); // calls to statement
-        return result; // the final result
+
+        if (!functionMode) {
+            return result; // the final result
+        }
+
+        if (result != null) {
+            this.sequence.addLast(result);
+        }
+
+        return null;
     }
 
     /**
@@ -239,6 +255,31 @@ public class CalculatorParser {
             result = new NamedConstant(st.sval, Constants.namedConstants.get(st.sval));
         } else {
             result = new Variable(this.st.sval);
+            if (this.st.nextToken() == '(') {
+                LinkedList<SymbolicExpression> arguments = new LinkedList<SymbolicExpression>();
+
+                while (true) {
+                    this.st.nextToken();
+                    if (this.st.ttype == this.st.TT_WORD) {
+                        arguments.addLast(new Variable(this.st.sval));
+                    } else if (this.st.ttype == this.st.TT_NUMBER) {
+                        arguments.addLast(new Constant(this.st.nval));
+                    } else {
+                        throw new SyntaxErrorException("Invalid function arguments");
+                    }
+
+                    int token = this.st.nextToken();
+                    if (token == ',') {
+                        continue;
+                    } else if (token == ')') {
+                        break;
+                    } else {
+                        throw new SyntaxErrorException("Invalid function arguments");
+                    }
+                }
+
+                result = new FunctionCall(result, arguments);
+            }
         }
         return result;
     }
@@ -310,6 +351,15 @@ public class CalculatorParser {
         SymbolicExpression result;
         if (this.st.ttype == this.st.TT_WORD && this.st.sval.equals(IF)) {
             result = ifStatement();
+        } else if (this.st.ttype == this.st.TT_WORD && this.st.sval.equals(FUNCTION)) {
+            if (this.functionMode) {
+                throw new SyntaxErrorException("Can not declare function inside other function");
+            }
+            this.functionMode = true;
+            result = function();
+        } else if (this.st.ttype == this.st.TT_WORD && this.st.sval.equals(END)) {
+            this.functionMode = false;
+            result = new FunctionDeclaration(this.name, this.parameters, new Sequence(this.sequence));
         } else if (this.st.ttype == '(') {
             this.st.nextToken();
             result = assignment();
@@ -341,6 +391,35 @@ public class CalculatorParser {
             result = number();
         }
         return result;
+    }
+
+    private SymbolicExpression function() throws IOException {
+        this.st.nextToken();
+
+        if (this.st.ttype != this.st.TT_WORD) {
+            throw new SyntaxErrorException("Function definition must have a name");
+        }
+
+        this.name = new Variable(this.st.sval);
+
+        if (this.st.nextToken() != '(') {
+            throw new SyntaxErrorException("expected '('");
+        }
+
+        while (true) {
+            this.st.nextToken();
+            this.parameters.addLast(new Variable(this.st.sval));
+            int token = this.st.nextToken();
+            if (token == ',') {
+                continue;
+            } else if (token == ')') {
+                break;
+            } else {
+                throw new SyntaxErrorException("Invalid function parameter");
+            }
+        }
+
+        return null;
     }
 
     /**

@@ -18,8 +18,11 @@ public class Calculator {
 
             try {
                 System.out.print("? ");
-                String input = sc.nextLine();
-                SymbolicExpression expr = parser.parse(input, vars);
+                SymbolicExpression expr;
+                do {
+                    String input = sc.nextLine();
+                    expr = parser.parse(input, vars);
+                } while (expr == null);
 
                 if (expr.isCommand()) {
                     expr.execute(vars, stats, sc);
