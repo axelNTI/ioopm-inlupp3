@@ -278,7 +278,7 @@ public class CalculatorParser {
                     }
                 }
 
-                result = new FunctionCall(result, arguments);
+                result = new FunctionCall((Variable)result, arguments);
             }
         }
         return result;
