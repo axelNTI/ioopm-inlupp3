@@ -71,6 +71,8 @@ public class CalculatorParser {
         SymbolicExpression result = statement(); // calls to statement
 
         if (!functionMode) {
+            this.parameters.clear();
+            this.sequence.clear();
             return result; // the final result
         }
 
