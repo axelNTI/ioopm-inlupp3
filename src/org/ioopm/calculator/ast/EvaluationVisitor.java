@@ -1,5 +1,6 @@
 package org.ioopm.calculator.ast;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class EvaluationVisitor implements Visitor {
@@ -238,5 +239,49 @@ public class EvaluationVisitor implements Visitor {
             return n.getFirstScope().accept(this);
         }
         return n.getSecondScope().accept(this);
+    }
+
+    public SymbolicExpression visit(FunctionDeclaration n) {
+        this.env.put(n.getFunctionName(), n);
+        return n;
+        
+    }
+
+    public SymbolicExpression visit(FunctionCall n) {
+
+        FunctionDeclaration function = (FunctionDeclaration) this.env.get(n.getFunctionName());
+
+        env.pushEnvironment();
+
+        Sequence sequence = function.getSequence();
+        LinkedList<Variable> parameters = function.getParameters();
+        LinkedList<SymbolicExpression> arguments = n.getArguments();
+
+        for (Iterator<Variable> iter = parameters.iterator(); iter.hasNext();) {
+            Variable par = iter.next();
+            SymbolicExpression arg = arguments.removeFirst().accept(this);
+
+            // throw exception if arg isn't a constant
+
+            env.put(par, arg);
+        }
+
+        SymbolicExpression result = sequence.accept(this);
+
+        env.popEnvironment();
+        
+        return result;
+    }
+
+    public SymbolicExpression visit(Sequence n) {
+        
+        LinkedList<SymbolicExpression> seq = n.getExpressions();
+
+        SymbolicExpression result = null;
+        for (Iterator<SymbolicExpression> iter = seq.iterator(); iter.hasNext();) {
+            result = iter.next().accept(this);
+        }
+
+        return result;
     }
 }
