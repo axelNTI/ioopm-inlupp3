@@ -34,7 +34,7 @@ public class CalculatorParser {
     private static String EQ = "==";
     private static String FUNCTION = "function";
     private static String END = "end";
-    
+
     private boolean functionMode = false;
     private Variable name;
     private LinkedList<Variable> parameters = new LinkedList<Variable>();
@@ -63,22 +63,29 @@ public class CalculatorParser {
      * @throws IOException by nextToken() if it reads invalid input
      */
     public SymbolicExpression parse(String inputString, Environment vars) throws IOException {
-        this.st = new StreamTokenizer(new StringReader(inputString)); // reads from inputString via stringreader.
-        this.vars = vars;
-        this.st.ordinaryChar('-');
-        this.st.ordinaryChar('/');
-        this.st.eolIsSignificant(true);
-        SymbolicExpression result = statement(); // calls to statement
+        try {
+            this.st = new StreamTokenizer(new StringReader(inputString)); // reads from inputString via stringreader.
+            this.vars = vars;
+            this.st.ordinaryChar('-');
+            this.st.ordinaryChar('/');
+            this.st.eolIsSignificant(true);
+            SymbolicExpression result = statement(); // calls to statement
 
-        if (!functionMode) {
-            return result; // the final result
+            if (!functionMode) {
+                return result; // the final result
+            }
+
+            if (result != null) {
+                this.sequence.addLast(result);
+            }
+
+            return null;
+        } catch (Exception e) {
+            this.functionMode = false;
+            this.parameters.clear();
+            this.sequence.clear();
+            throw e;
         }
-
-        if (result != null) {
-            this.sequence.addLast(result);
-        }
-
-        return null;
     }
 
     /**
@@ -259,7 +266,10 @@ public class CalculatorParser {
                 LinkedList<SymbolicExpression> arguments = new LinkedList<SymbolicExpression>();
 
                 while (true) {
-                    this.st.nextToken();
+                    if (this.st.nextToken() == ')') {
+                        break;
+                    }
+
                     if (this.st.ttype == this.st.TT_WORD) {
                         arguments.addLast(new Variable(this.st.sval));
                     } else if (this.st.ttype == this.st.TT_NUMBER) {
@@ -412,11 +422,15 @@ public class CalculatorParser {
             throw new SyntaxErrorException("expected '('");
         }
 
+        if (this.st.nextToken() == ')') {
+            return null;
+        }
+
         while (true) {
-            this.st.nextToken();
             this.parameters.addLast(new Variable(this.st.sval));
             int token = this.st.nextToken();
             if (token == ',') {
+                this.st.nextToken();
                 continue;
             } else if (token == ')') {
                 break;
