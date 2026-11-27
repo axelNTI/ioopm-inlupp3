@@ -131,7 +131,9 @@ public class ReassignmentChecker implements Visitor {
             list.addLast(str);
         }
 
-        this.duplicates = scope.size() != list.size();
+        if (!duplicates) {
+            this.duplicates = scope.size() != list.size();
+        }
 
         return null;
     }
