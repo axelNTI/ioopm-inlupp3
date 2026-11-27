@@ -4,7 +4,7 @@ public class Variable extends Atom implements Comparable<Variable> {
     private String identifier;
 
     public Variable(String identifier) {
-        this.identifier = identifier;
+        this.identifier = String.copyValueOf(identifier.toCharArray());
         this.priority = 150;
     }
 

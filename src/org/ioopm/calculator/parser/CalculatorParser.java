@@ -151,12 +151,29 @@ public class CalculatorParser {
 
     private SymbolicExpression ifStatement() throws IOException {
         this.st.nextToken();
-        SymbolicExpression identifier1 = identifier();
+        SymbolicExpression identifier1;
+        if (this.st.ttype == this.st.TT_WORD) {
+            identifier1 = new Variable(this.st.sval);
+        } else if (this.st.ttype == this.st.TT_NUMBER) {
+            identifier1 = new Constant(this.st.nval);
+        } else {
+            throw new SyntaxErrorException(
+                    "Conditional statement does not support anything other than variables and constants");
+        }
         this.st.nextToken();
 
         String operator = getOperator();
 
-        SymbolicExpression identifier2 = identifier();
+        SymbolicExpression identifier2;
+
+        if (this.st.ttype == this.st.TT_WORD) {
+            identifier2 = new Variable(this.st.sval);
+        } else if (this.st.ttype == this.st.TT_NUMBER) {
+            identifier2 = new Constant(this.st.nval);
+        } else {
+            throw new SyntaxErrorException(
+                    "Conditional statement does not support anything other than variables and constants");
+        }
 
         if (this.st.nextToken() != '{') {
             throw new SyntaxErrorException("expected '{'");

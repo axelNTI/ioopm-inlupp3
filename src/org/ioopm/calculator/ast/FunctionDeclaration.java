@@ -8,7 +8,7 @@ public class FunctionDeclaration extends SymbolicExpression {
     private Sequence sequence;
 
     public FunctionDeclaration(Variable variableName, LinkedList<Variable> parameters, Sequence sequence) {
-        this.name = variableName;
+        this.name = new Variable(variableName.toString());
         this.sequence = sequence;
         this.parameters = new LinkedList<Variable>();
 

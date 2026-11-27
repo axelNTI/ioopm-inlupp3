@@ -7,8 +7,11 @@ public class FunctionCall extends SymbolicExpression {
     private LinkedList<SymbolicExpression> arguments;
 
     public FunctionCall(Variable identifier, LinkedList<SymbolicExpression> args) {
-        this.name = identifier;
-        this.arguments = args;
+        this.name = new Variable(identifier.toString());
+        this.arguments = new LinkedList<SymbolicExpression>();
+        for (SymbolicExpression expr : args) {
+            this.arguments.addLast(expr);
+        }
     }
 
     public Variable getFunctionName() {

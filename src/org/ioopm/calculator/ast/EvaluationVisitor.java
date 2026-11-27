@@ -53,6 +53,7 @@ public class EvaluationVisitor implements Visitor {
     public boolean checkFunction(SymbolicExpression topLevel, Environment env) {
         functionChecker.env = new EnvironmentStack(env);
         functionChecker.error = false;
+        functionChecker.checkedSequences = new LinkedList<Sequence>();
 
         topLevel.accept(functionChecker);
 
@@ -273,9 +274,10 @@ public class EvaluationVisitor implements Visitor {
         LinkedList<Variable> parameters = function.getParameters();
         LinkedList<SymbolicExpression> arguments = n.getArguments();
 
+        Iterator<SymbolicExpression> iter2 = arguments.iterator();
         for (Iterator<Variable> iter = parameters.iterator(); iter.hasNext();) {
             Variable par = iter.next();
-            SymbolicExpression arg = arguments.removeFirst().accept(this);
+            SymbolicExpression arg = iter2.next().accept(this);
 
             if (!(arg instanceof Constant)) {
                 throw new IllegalAssignmentException("Can't use undefined variable as argument");

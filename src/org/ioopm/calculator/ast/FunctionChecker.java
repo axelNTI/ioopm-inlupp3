@@ -1,13 +1,17 @@
 package org.ioopm.calculator.ast;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
 
 public class FunctionChecker implements Visitor {
 
     private boolean checkingFunctionDeclaration = false;
     private boolean checkingFunctionCall = false;
     private EnvironmentStack definedVariables = new EnvironmentStack(new Environment());
+    private Stack<FunctionDeclaration> currentlyEvaluatingFunction = new Stack<FunctionDeclaration>();
 
+    protected LinkedList<Sequence> checkedSequences;
     protected boolean error;
     protected EnvironmentStack env;
 
@@ -21,12 +25,12 @@ public class FunctionChecker implements Visitor {
 
     @Override
     public SymbolicExpression visit(Assignment n) {
+        if (checkingFunctionCall) {
+            this.definedVariables.put((Variable) n.rhs(), null);
+        }
+
         n.lhs().accept(this);
         n.rhs().accept(this);
-
-        if (checkingFunctionCall && n.rhs().isVariable()) {
-            this.definedVariables.put((Variable) n.rhs(), n.lhs());
-        }
 
         return null;
     }
@@ -160,12 +164,22 @@ public class FunctionChecker implements Visitor {
     @Override
     public SymbolicExpression visit(FunctionDeclaration n) {
         this.checkingFunctionDeclaration = true;
+        this.currentlyEvaluatingFunction.push(n);
 
         n.getSequence().accept(this);
 
+        this.currentlyEvaluatingFunction.pop();
         this.checkingFunctionDeclaration = false;
 
         return null;
+    }
+
+    private boolean isExistingFunction(FunctionCall n, SymbolicExpression expr) {
+        if (expr == null) {
+            return n.getFunctionName().equals(this.currentlyEvaluatingFunction.peek().getFunctionName());
+        }
+
+        return expr.isFunction();
     }
 
     @Override
@@ -175,13 +189,13 @@ public class FunctionChecker implements Visitor {
 
         Variable name = n.getFunctionName();
         SymbolicExpression expr = this.env.get(name);
-        if (!expr.isFunction()) {
+        if (!isExistingFunction(n, expr)) {
             System.out.println("Function undefined");
             this.error = true;
             return null;
         }
 
-        FunctionDeclaration function = (FunctionDeclaration) expr;
+        FunctionDeclaration function = expr == null ? this.currentlyEvaluatingFunction.peek() : (FunctionDeclaration) expr;
 
         int argc = n.getArguments().size();
         int paramc = function.getParameters().size();
@@ -211,11 +225,16 @@ public class FunctionChecker implements Visitor {
 
     @Override
     public SymbolicExpression visit(Sequence n) {
-
+        if (this.checkedSequences.contains(n)) {
+            return null;
+        }
+        
+        this.checkedSequences.add(n);
+        
         for (Iterator<SymbolicExpression> iter = n.getExpressions().iterator(); iter.hasNext();) {
             iter.next().accept(this);
         }
-
+        
         return null;
     }
 
