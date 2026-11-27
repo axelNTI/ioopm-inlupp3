@@ -6,7 +6,10 @@ public class Sequence extends SymbolicExpression {
     private LinkedList<SymbolicExpression> sequence;
 
     public Sequence(LinkedList<SymbolicExpression> sequence) {
-        this.sequence = sequence;
+        this.sequence = new LinkedList<SymbolicExpression>();
+        for (SymbolicExpression expr : sequence) {
+            this.sequence.addLast(expr);
+        }
     }
 
     public LinkedList<SymbolicExpression> getExpressions() {

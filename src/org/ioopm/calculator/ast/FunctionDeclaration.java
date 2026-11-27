@@ -9,8 +9,12 @@ public class FunctionDeclaration extends SymbolicExpression {
 
     public FunctionDeclaration(Variable variableName, LinkedList<Variable> parameters, Sequence sequence) {
         this.name = variableName;
-        this.parameters = parameters;
         this.sequence = sequence;
+        this.parameters = new LinkedList<Variable>();
+
+        for (Variable var : parameters) {
+            this.parameters.addLast(var);
+        }
     }
 
     public Variable getFunctionName() {

@@ -6,7 +6,7 @@ public class FunctionChecker implements Visitor {
 
     private boolean checkingFunctionDeclaration = false;
     private boolean checkingFunctionCall = false;
-    private EnvironmentStack definedVariables;
+    private EnvironmentStack definedVariables = new EnvironmentStack(new Environment());
 
     protected boolean error;
     protected EnvironmentStack env;

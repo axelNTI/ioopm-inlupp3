@@ -17,10 +17,10 @@ public class EnvironmentStack extends Environment {
 
     @Override
     public SymbolicExpression get(Object o) {
-        
-        for (Iterator<Environment> iter = stack.iterator(); iter.hasNext(); ) {
+
+        for (Iterator<Environment> iter = stack.iterator(); iter.hasNext();) {
             Environment v = iter.next();
-    
+
             if (v.get(o) != null) {
                 return v.get(o);
             }
@@ -34,5 +34,30 @@ public class EnvironmentStack extends Environment {
 
     public void popEnvironment() {
         stack.pop();
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        for (Iterator<Environment> iter = stack.iterator(); iter.hasNext();) {
+            Environment v = iter.next();
+            if (v.containsKey(key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override 
+    public String toString() {
+        String value = "";
+        
+        for (Iterator<Environment> iter = stack.iterator(); iter.hasNext();) {
+            Environment v = iter.next();
+            value = value + '\n' + v.toString();
+        }
+
+        return value;
+        
     }
 }
