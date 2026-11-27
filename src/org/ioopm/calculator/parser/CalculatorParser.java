@@ -71,8 +71,6 @@ public class CalculatorParser {
         SymbolicExpression result = statement(); // calls to statement
 
         if (!functionMode) {
-            this.parameters.clear();
-            this.sequence.clear();
             return result; // the final result
         }
 
@@ -279,8 +277,9 @@ public class CalculatorParser {
                         throw new SyntaxErrorException("Invalid function arguments");
                     }
                 }
-
                 result = new FunctionCall((Variable)result, arguments);
+            } else {
+                this.st.pushBack();
             }
         }
         return result;
@@ -360,8 +359,13 @@ public class CalculatorParser {
             this.functionMode = true;
             result = function();
         } else if (this.st.ttype == this.st.TT_WORD && this.st.sval.equals(END)) {
+            if (!this.functionMode) {
+                throw new SyntaxErrorException("Can not end a function without starting it.");
+            }
             this.functionMode = false;
             result = new FunctionDeclaration(this.name, this.parameters, new Sequence(this.sequence));
+            this.parameters.clear();
+            this.sequence.clear();
         } else if (this.st.ttype == '(') {
             this.st.nextToken();
             result = assignment();
