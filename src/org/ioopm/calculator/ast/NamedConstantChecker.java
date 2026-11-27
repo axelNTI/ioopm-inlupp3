@@ -1,6 +1,7 @@
 package org.ioopm.calculator.ast;
 
 import java.util.LinkedList;
+import java.util.Iterator;
 
 public class NamedConstantChecker implements Visitor {
     protected LinkedList<String> exceptions;
@@ -133,20 +134,23 @@ public class NamedConstantChecker implements Visitor {
 
     @Override
     public SymbolicExpression visit(FunctionDeclaration n) {
-        // TODO: Stub
+        n.getSequence().accept(this);
         return null;
     }
 
     @Override
     public SymbolicExpression visit(FunctionCall n) {
-        // TODO: Stub
         return null;
     }
 
     @Override
     public SymbolicExpression visit(Sequence n) {
-        // TODO: Stub
+        LinkedList<SymbolicExpression> seq = n.getExpressions();
+
+        for (Iterator<SymbolicExpression> iter = seq.iterator(); iter.hasNext();) {
+            iter.next().accept(this);
+        }
+
         return null;
     }
-
 }

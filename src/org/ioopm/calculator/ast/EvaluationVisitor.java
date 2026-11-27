@@ -242,9 +242,15 @@ public class EvaluationVisitor implements Visitor {
     }
 
     public SymbolicExpression visit(FunctionDeclaration n) {
-        this.env.put(n.getFunctionName(), n);
-        return n;
-        
+
+        SymbolicExpression expr = this.env.get(n.getFunctionName());
+
+        if (expr instanceof FunctionDeclaration || expr == null) {
+            this.env.put(n.getFunctionName(), n);
+            return n;
+        }
+
+        throw new IllegalAssignmentException("Can't redefine variable as function");
     }
 
     public SymbolicExpression visit(FunctionCall n) {
@@ -261,7 +267,9 @@ public class EvaluationVisitor implements Visitor {
             Variable par = iter.next();
             SymbolicExpression arg = arguments.removeFirst().accept(this);
 
-            // throw exception if arg isn't a constant
+            if (!(arg instanceof Constant)) {
+                throw new IllegalAssignmentException("Can't use undefined variable as argument");
+            }
 
             env.put(par, arg);
         }
