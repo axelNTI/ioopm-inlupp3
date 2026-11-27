@@ -7,6 +7,7 @@ public class EvaluationVisitor implements Visitor {
     private EnvironmentStack env = null;
     private NamedConstantChecker checker = new NamedConstantChecker();
     private ReassignmentChecker reassignmentChecker = new ReassignmentChecker();
+    private FunctionChecker functionChecker = new FunctionChecker();
 
     public SymbolicExpression evaluate(SymbolicExpression topLevel, Environment env) {
         this.env = new EnvironmentStack(env);
@@ -45,8 +46,17 @@ public class EvaluationVisitor implements Visitor {
             }
             list.addLast(str);
         }
-        
+
         return !reassignmentChecker.duplicates && scope.size() == list.size();
+    }
+    
+    public boolean checkFunction(SymbolicExpression topLevel, Environment env) {
+        functionChecker.env = new EnvironmentStack(env);
+        functionChecker.error = false;
+
+        topLevel.accept(functionChecker);
+
+        return !functionChecker.error;
     }
 
     public SymbolicExpression visit(Addition n) {

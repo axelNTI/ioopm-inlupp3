@@ -29,4 +29,9 @@ public class FunctionDeclaration extends SymbolicExpression {
     public SymbolicExpression accept(Visitor v) {
         return v.visit(this);
     }
+
+    @Override
+    public boolean isFunction() {
+        return true;
+    }
 }

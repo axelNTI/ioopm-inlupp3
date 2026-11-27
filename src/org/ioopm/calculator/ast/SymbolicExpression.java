@@ -39,4 +39,8 @@ public abstract class SymbolicExpression {
     public boolean isVariable() {
         return false;
     }
+
+    public boolean isFunction() {
+        return false;
+    }
 }

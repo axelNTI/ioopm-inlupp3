@@ -31,7 +31,7 @@ public class Calculator {
 
                 stats.addNoExpressions();
 
-                if (!visitor.check(expr) || !visitor.checkReassignment(expr)) {
+                if (!visitor.check(expr) || !visitor.checkReassignment(expr) || !visitor.checkFunction(expr, vars)) {
                     continue;
                 }
 
