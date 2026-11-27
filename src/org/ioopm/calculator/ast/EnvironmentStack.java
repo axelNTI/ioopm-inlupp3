@@ -51,13 +51,24 @@ public class EnvironmentStack extends Environment {
     @Override 
     public String toString() {
         String value = "";
-        
+
         for (Iterator<Environment> iter = stack.iterator(); iter.hasNext();) {
             Environment v = iter.next();
-            value = value + '\n' + v.toString();
+            value = value + v.toString();
         }
 
         return value;
-        
+    }
+    
+    @Override
+    public int size() {
+        int value = 0;
+
+        for (Iterator<Environment> iter = stack.iterator(); iter.hasNext();) {
+            Environment v = iter.next();
+            value = value + v.size();
+        }
+
+        return value;
     }
 }

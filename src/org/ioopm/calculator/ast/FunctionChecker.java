@@ -117,7 +117,7 @@ public class FunctionChecker implements Visitor {
 
     @Override
     public SymbolicExpression visit(Variable n) {
-        if (checkingFunctionCall && (!this.env.containsKey(n) || !this.definedVariables.containsKey(n))) {
+        if (checkingFunctionCall && !this.env.containsKey(n) && !this.definedVariables.containsKey(n)) {
             System.out.println("Undefined variable in function body");
             this.error = true;
         }
